@@ -8,7 +8,7 @@ Etudiante :
 
 UPMC 2019
 
-### Installation préalable 
+## Installation préalable 
 
 Pour pouvoir exécuter ce projet, il est nécessaire d'importer les librairies Cplex studio, car le code sources employe la résolution d'un programme linéaire.
 
