@@ -1,0 +1,4 @@
+mapname:mapInterlocking1
+agentCollect:Collect1:1:free:50:-1:0:5:5
+agentCollect:Collect2:1:free:50:-1:0:5:5
+agentTanker:Tanker1:1:free:300:200:0:1:1

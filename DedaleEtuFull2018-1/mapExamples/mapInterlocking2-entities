@@ -1,0 +1,4 @@
+mapname:mapInterlocking1
+agentExplo:Explo1:3:free:-1:-1:0:1:1
+agentExplo:Explo2:3:free:-1:-1:0:1:1
+agentTanker:Tanker1:3:free:300:200:0:1:5
