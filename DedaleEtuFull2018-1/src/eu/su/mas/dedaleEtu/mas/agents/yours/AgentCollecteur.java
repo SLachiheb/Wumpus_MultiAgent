@@ -146,7 +146,7 @@ public class AgentCollecteur extends AgentAbstrait{
 		if (nodeCloses.isEmpty() == false) {
 			// Recherche tout les chemins allant de ma position à un noeud close :
 			List<List<String>> list_chemin_close = this.getCarteExploration().getShortestPathNodes(this.getCurrentPosition(),
-					new ArrayList<String>(nodeCloses), 10/*5*/);		
+					new ArrayList<String>(nodeCloses), (nodeCloses.size() / 2)/*5*/);		
 			
 			if (this.getNodesBut().isEmpty() == false) {
 				// Supprime les chemins passant par le noeud bloqué :

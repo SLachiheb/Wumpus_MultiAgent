@@ -138,7 +138,7 @@ public class AgentAbstrait extends AbstractDedaleAgent implements Serializable {
     public static final int T_ECHO_TO_PRUGE_ECHOFLOWDING						= 17;
     public static final int T_SEND_CARTE_SONS_TO_PRUGE_ECHOFLOWDING				= 18;
     public static final int T_WAIT_CARTE_DAD_TO_PRUGE_ECHOFLOWDING				= 19;
-    public static final int	T_PRUGE_ECHOFLOWDING_TO_PLANIFICATION				= 10;
+    public static final int	T_PRUGE_ECHOFLOWDING_TO_PLANIFICATION				= 20;
     public static final int	T_PRUGE_ECHOFLOWDING_TO_END							= 21;
     public static final int	T_PRUGE_ECHOFLOWDING_TO_EXPLORATION					= 22;
     public static final int T_ATTENDRE_CONFIRMATION_FILS						= 23;
