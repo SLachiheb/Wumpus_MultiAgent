@@ -99,6 +99,7 @@ public class PlanificationBehaviour extends OneShotBehaviour {
 				break;
 			case SendMap :
 				// Il y a eu des changements dans la carte après agrégation :
+				//this.searchNodesBut();
 				if (this.agent.getCarteExploration().getChangeMap() == true) {
 					this.searchNodesBut();
 				} else {
@@ -264,6 +265,7 @@ public class PlanificationBehaviour extends OneShotBehaviour {
 				break;
 			case SendMap :
 				// Il y a eu des changements dans la carte après agrégation :
+				//this.searchNodesBut();
 				if (agentCollecteur.getCarteExploration().getChangeMap() == true) {
 					this.searchNodesBut();
 				} else {
@@ -430,6 +432,7 @@ public class PlanificationBehaviour extends OneShotBehaviour {
 				break;
 			case SendMap :
 				// Il y a eu des changements dans la carte après agrégation :
+				//this.searchNodesBut();
 				if (this.agent.getCarteExploration().getChangeMap() == true) {
 					this.searchNodesBut();
 				} else {
@@ -546,7 +549,7 @@ public class PlanificationBehaviour extends OneShotBehaviour {
 	private void selectNodeGoal () {
 		// Recherche les chemins but :
 		List<List<String>> list_chemin = this.agent.getCarteExploration().getShortestPathNodes(this.agent.getCurrentPosition(),
-				this.agent.getCarteExploration().getNodesOpen(), 2);
+				this.agent.getCarteExploration().getNodesOpen(), 10);
 		// Verifier si l'agent (this) est prioritaire :
 		if (this.agent.getIdAgent() < this.agent.getIdentifiantShareMap().getId()) {
 			// Je suis  prioritaire donc je prends le noeud but le plus proche :

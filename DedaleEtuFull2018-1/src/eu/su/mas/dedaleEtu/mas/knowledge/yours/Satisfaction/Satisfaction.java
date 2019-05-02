@@ -122,7 +122,7 @@ public class Satisfaction implements Serializable{
 	}
 	
 	// Borne de satisfaction personnelle :
-	private static final Double 		PMAX 			= 40.; // 20 50.
+	private static final Double 		PMAX 			= 100.; // 20 50.
 	private final static Integer		MIN				= 5;
 	private final static Integer		MAX				= 10;
 	private final static Double			SEUIL			= PMAX/2;
@@ -367,6 +367,7 @@ public class Satisfaction implements Serializable{
 			//System.out.println("**************** Nouveau noeud but : " + newChemin + "\n");
 			// Devenir Egoiste :
 			this.setEtatSociable(EtatAgent.egoiste);
+			this.list_tabou.clear(); /*******************************************************************************/
 			// Mettre à jour les variables :
 			this.needNewCheminBut = true;
 			this.searchEchappatoire = false;

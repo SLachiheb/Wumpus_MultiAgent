@@ -126,6 +126,8 @@ public class AgentCollecteur extends AgentAbstrait{
 	 * @return
 	 */
 	public List<String> searchChemin_isAbandonTask () {
+		System.out.println("*****" + this.getLocalName() + " : ABANDON");
+
 		ArrayList<String> cheminFind = new ArrayList<String>();
 		
 		// Mettre à jour la satisfaction :
@@ -166,7 +168,7 @@ public class AgentCollecteur extends AgentAbstrait{
 				int alea = this.random.nextInt(taille_list_close); //
 				cheminFind = new ArrayList<String>(list_chemin_close.get(alea));
 			}	
-		}
+		} 
 		return cheminFind;
 	}
 	public void					updateCapacitySac(Integer value) {this.capacitySac = value;}

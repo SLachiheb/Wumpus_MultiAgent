@@ -181,7 +181,7 @@ public class PDM implements Serializable {
 				score = 0;
 			}
 			
-			// Si l'etat est un Etat de type EtatPosition :
+			// Si l'etat est un Etat de type EtatVide :
 			if (entry.getValue() instanceof EtatVide) {
 				score = 0;
 			}
@@ -247,7 +247,6 @@ public class PDM implements Serializable {
 			// Si l'etat est un Etat de type EtatTanker :
 			if (entry.getValue() instanceof EtatTanker) {
 				EtatTanker etatTanker = (EtatTanker)entry.getValue();	
-				// Recompense en fonction de ma capcité de mon sac et se ce que je peux déposer au tanker :
 				
 				// Est-ce que le Tanker est loin de ma position :
 				List<String> cheminTanker = this.agent.getCarteExploration().getShortestPath(this.agent.getCurrentPosition(), 
@@ -321,9 +320,14 @@ public class PDM implements Serializable {
 			}
 			
 			// Si mon sac est rempie au max :
-			if (tresor.getEtatTresor().getRecompense() > this.agent.getBackPackFreeSpace()) {
+			/*if (tresor.getEtatTresor().getRecompense() > this.agent.getBackPackFreeSpace()) {
+				isValide = false;
+			}*/
+			
+			if (this.agent.getBackPackFreeSpace() == 0) {
 				isValide = false;
 			}
+			
 			if (isValide == true) {
 				// Si toute les conditions ne sont pas vérifiées alors je l'ajoute dans les trésors valides :
 				tresorsValides.add(tresor);

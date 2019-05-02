@@ -60,7 +60,7 @@ public class AltruisteBehaviour extends OneShotBehaviour {
 					
 					// Faire une attente pour laisser l'agent Voisin passer :
 					/**
-					 * Le faire attendre 700 ms à chaque mouvement
+					 * Le faire attendre 1000 ms à chaque mouvement
 					 */
 					try {
 						this.agent.doWait(1000);

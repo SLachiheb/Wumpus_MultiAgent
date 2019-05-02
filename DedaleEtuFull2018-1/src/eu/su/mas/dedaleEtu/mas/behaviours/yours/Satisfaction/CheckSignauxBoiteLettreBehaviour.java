@@ -129,7 +129,7 @@ public class CheckSignauxBoiteLettreBehaviour extends OneShotBehaviour {
 			this.numTransition = AgentExplorateur.T_EGOISTE;	
 		}
 		
-		System.out.println("\n1)" + this.agent.getLocalName() + " : \n" + this.agent.getSatisfaction());
+		//System.out.println("\n1)" + this.agent.getLocalName() + " : \n" + this.agent.getSatisfaction());
 	}
 	
 	/**

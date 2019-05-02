@@ -106,6 +106,7 @@ public class AgentTanker extends AgentAbstrait {
 	 * @return
 	 */
 	public List<String> searchChemin_isAbandonTask () {
+		System.out.println("*****" + this.getLocalName() + " : ABANDON");
 		ArrayList<String> cheminFind = new ArrayList<String>();
 		
 		// Ajoute dans les noeuds closes, le noeud faisant pas parti de mon noeud courant :

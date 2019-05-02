@@ -77,6 +77,8 @@ public class AgentExplorateur extends AgentAbstrait {
 	 * @return
 	 */
 	public List<String> searchChemin_isAbandonTask () {
+		System.out.println("*****" + this.getLocalName() + " : ABANDON");
+
 		ArrayList<String> cheminFind = new ArrayList<String>();
 		
 		// Mettre à jour la satisfaction :
