@@ -2,7 +2,7 @@
 
 ## Renseignements
 
-Etudiant :
+Etudiante :
 
 * Lachiheb Sarah
 
