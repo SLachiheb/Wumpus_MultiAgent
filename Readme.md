@@ -24,7 +24,7 @@ Dans ce projet, nous cherchons à mettre en place une variante de ce jeu dans la
 
 ## Installation préalable 
 
-Il est nécessaire d'importer au préalable, les librairies Cplex studio pour le fonctionnement du projet.
+Il est nécessaire d'importer au préalable les librairies Cplex studio pour le fonctionnement du projet.
 
 Pour exécuter le programme, il est nécessaire d'utiliser "Eclipse" et de selectionner le fichier Principal.java présent dans le dossier "princ", puis faire un clic droit sur celui-ci en selectionnant "run as../Java application".
 
