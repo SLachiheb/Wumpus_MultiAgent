@@ -24,9 +24,7 @@ public class ExplorationTresorPerduBehaviour extends OneShotBehaviour {
 	}
 	
 	@Override
-	public void action() {
-		//System.out.println("**** " + this.agent.getLocalName() + " est dans ExplorationTresorPerduBehaviour");
-		
+	public void action() {		
 		// Modification du comportement :
 		this.agent.setStrategie(Strategie.ExplorationTresorPerdu);
 		
@@ -119,12 +117,9 @@ public class ExplorationTresorPerduBehaviour extends OneShotBehaviour {
 				
 				if (this.agent.getIsMove()) {
 					// Entretient du chemin dans les données de l'agent :
-					this.agent.cheminButRemove(0); // Supprime l'élément current si on a pu bougé
+					this.agent.cheminButRemove(0); 
 					this.agent.incrementeCptNodeVisited();
-					//System.out.println(this.myAgent.getLocalName() + " => Pos = " + myPosition + ", [" + nextNode + "]");
-				} else {
-					//System.out.println(this.myAgent.getLocalName() + " => Move impossible vers " + nextNode +", je reste en " + myPosition);
-				}
+				} 
 			}
 		}
 
@@ -132,7 +127,6 @@ public class ExplorationTresorPerduBehaviour extends OneShotBehaviour {
 
 	@Override
 	public int onEnd(){
-		//System.out.println("**** " + this.agent.getLocalName() + " sort de ExplorationTresorPerduBehaviour");
 		return AgentAbstrait.T_CHECK_SIGNAUX_AFTER_EXPLO_TRESOR_PERDU;
 	}
 }

@@ -29,9 +29,7 @@ public class SendEmissionRepulsionBehaviour extends OneShotBehaviour {
 		this.numTransition = null;
 	}
 	@Override
-	public void action() {
-		//System.out.println("**** " + this.agent.getLocalName() + " <---- entre dans SendEmissionRepulsionBehaviour\n");
-		
+	public void action() {		
 		// 1) Creation d'un message :
 		ACLMessage msg = new ACLMessage(ACLMessage.REQUEST); 
 		msg.setProtocol("SIGNAL");
@@ -48,7 +46,6 @@ public class SendEmissionRepulsionBehaviour extends OneShotBehaviour {
                 for (DFAgentDescription agent : resultats) {
                 	// Ne communique pas avec lui même:
                     if (agent.getName().equals(this.getAgent().getAID()) == false ){
-                    	//System.out.println(this.agent.getLocalName() + "----> Signal Repulsif à " + agent.getName().getLocalName());
                     	msg.addReceiver(agent.getName());
                     }
                 }
@@ -100,7 +97,6 @@ public class SendEmissionRepulsionBehaviour extends OneShotBehaviour {
 	
 	@Override
 	public int onEnd(){
-		//System.out.println("**** " + this.agent.getLocalName() + " ----> sort de SendEmissionRepulsionBehaviour\n");
 		return this.numTransition;
 	}
 

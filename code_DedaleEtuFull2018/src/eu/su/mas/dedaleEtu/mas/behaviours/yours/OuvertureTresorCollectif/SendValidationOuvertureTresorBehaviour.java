@@ -27,9 +27,6 @@ public class SendValidationOuvertureTresorBehaviour extends OneShotBehaviour {
 	
 	@Override
 	public void action() {
-		//System.out.println("**** " + this.agent.getLocalName() + " est dans SendValidationOuvertureTresorBehaviour");
-		//System.out.println("**** " + this.agent.getLocalName() + " : j'envoie l'info que le trésor est ouvert");
-
 		this.agent.attendre();
 		
 		// Envoyer une proposition d'aide au géneur :
@@ -70,7 +67,6 @@ public class SendValidationOuvertureTresorBehaviour extends OneShotBehaviour {
 	
 	@Override
 	public int onEnd(){
-		//System.out.println("**** " + this.agent.getLocalName() + " sort de SendValidationOuvertureTresorBehaviour");
 		return AgentAbstrait.T_CHECK_SIGNAL_AFTER_SEND_VALIDE_TRESOR;
 	}
 

@@ -25,7 +25,6 @@ public class SendPositionSiloBehaviour extends OneShotBehaviour {
 
 	@Override
 	public void action() {
-		//System.out.println("**** " + this.agent.getLocalName() + " est dans SendPositionSilo");
 		this.agent.setStrategie(Strategie.SendPositionSilo);
 
 		// Envoie un message de Confirmation pour l'agent le plus prioritaire :
@@ -44,7 +43,6 @@ public class SendPositionSiloBehaviour extends OneShotBehaviour {
                 	// Ne communique ni avec lui même, ni avec les agents ayant connaissance de sa position :
                 	if (this.agent.getKnowledgePositionSilo().contains(agent.getName()) == false 
                 			&&  agent.getName().equals(this.getAgent().getAID()) == false) {
-                    	//System.out.println(this.agent.getLocalName() + "----> Position Silo à " + agent.getName().getLocalName());
                     	// Ajout les expéditeurs du message :
                     	msg.addReceiver(agent.getName());
                 	}
@@ -61,7 +59,6 @@ public class SendPositionSiloBehaviour extends OneShotBehaviour {
 	
 	@Override
 	public int onEnd(){
-		//System.out.println("**** " + this.agent.getLocalName() + " sort de SendPositionSilo");
 		return AgentTanker.T_PLANIFICATION_AFTER_SEND_POSITION_SILO;
 	}
 }

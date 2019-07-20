@@ -152,9 +152,6 @@ public class ExplorationBehaviour extends OneShotBehaviour {
 				if (this.agent.getIsMove()) {
 					// Entretient du chemin dans les données de l'agent :
 					this.agent.cheminButRemove(0); // Supprime l'élément current si on a pu bougé
-					//System.out.println(this.myAgent.getLocalName() + " => Pos = " + myPosition + ", [" + nextNode + "]");
-				} else {
-					//System.out.println(this.myAgent.getLocalName() + " => Move impossible vers " + nextNode +", je reste en " + myPosition);
 				}
 			}
 		}
@@ -162,7 +159,6 @@ public class ExplorationBehaviour extends OneShotBehaviour {
 	
 	@Override
 	public int onEnd(){
-		//System.out.println(this.myAgent.getLocalName() + " est en "  + this.agent.getCurrentPosition() + "\n");
 		return AgentExplorateur.T_EXPLORATEUR;
 	}
 	

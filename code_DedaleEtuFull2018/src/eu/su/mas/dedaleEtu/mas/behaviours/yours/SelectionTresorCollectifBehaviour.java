@@ -25,17 +25,13 @@ public class SelectionTresorCollectifBehaviour extends OneShotBehaviour {
 	}
 
 	@Override
-	public void action() {
-		//System.out.println("**** " + this.agent.getLocalName() + " est dans SelectionTresorCollectifBehaviour");
-		
+	public void action() {		
 		// 1) Vérifier si on a aucune action et aucun comportement (altruiste/Abandon de task) en cours :
 		// 2) Aiguillage du comportement en fonction de l'action :
 		if (this.agent.getActionSatisfaction() == true) {
 			// Maj variable :
 			this.agent.setSearchTresorCollectif(false);
 			this.agent.setAttenteTresor(false);
-			// Affichage :
-			//System.out.println("**** " + this.agent.getLocalName() + " Action Interblocage\n");	
 		} 
 		else {
 			if (this.agent.getSearchTresorCollectif() == false) {
@@ -54,10 +50,8 @@ public class SelectionTresorCollectifBehaviour extends OneShotBehaviour {
 					// Si aucun trésor à dévérouiller :
 					this.agent.setExplorationTresorPerdu(true);
 					this.agent.setSearchTresorCollectif(false);
-					this.agent.setAttenteTresor(false); /***/
+					this.agent.setAttenteTresor(false);
 				}
-				// Affichage :
-				//System.out.println("**** " + this.agent.getLocalName() + " -> Action Tresor collectif Explorateur\n");
 			}
 		}
 	}
@@ -131,7 +125,6 @@ public class SelectionTresorCollectifBehaviour extends OneShotBehaviour {
 
 	@Override
 	public int onEnd(){
-		//System.out.println("**** " + this.agent.getLocalName() + " sort de SelectionTresorCollectifBehaviour");
 		if (this.agent.getExplorationTresorPerdu() == true) {
 			return AgentExplorateur.T_CHECK_SIGNAUX_AFTER_SELECT_TRESOR_COLLECTIF_EXPLO;
 		} else {

@@ -24,9 +24,6 @@ public class ActionGestionInterblocageBehaviour extends OneShotBehaviour {
 
 	@Override
 	public void action() {
-		//System.out.println("**** " + this.agent.getLocalName() + " est dans ActionGestionInterblocageBehaviour");
-
-		//this.attendre();
 		this.agent.attendre();
 		
 		// MaJ des cartes Dangers et Tresors :
@@ -70,15 +67,13 @@ public class ActionGestionInterblocageBehaviour extends OneShotBehaviour {
 		
 		if (this.agent.getIsMove()) {
 			// Entretient du chemin dans les données de l'agent :
-			this.agent.cheminButRemove(0); // Supprime l'élément current si on a pu bougé
-			//System.out.println(this.myAgent.getLocalName() + " => Pos = " + this.agent.getCurrentPosition());
+			this.agent.cheminButRemove(0); // Supprime l'élément current si on a pu bouger
 		}
 	}
 	
 	
 	@Override
 	public int onEnd(){
-		//System.out.println("**** " + this.agent.getLocalName() + " sort de ActionGestionInterblocageBehaviour");
 		return this.numTransition;
 	}
 }

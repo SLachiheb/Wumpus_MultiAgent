@@ -35,7 +35,6 @@ public class ActionGestionTresorCollectifBehaviour extends OneShotBehaviour {
 	
 	@Override
 	public void action() {
-		//System.out.println("**** " + this.agent.getLocalName() + " est dans ActionGestionTresorCollectifBehaviour");
 		this.agent.setStrategie(Strategie.ActionTresorCollecif);
 		
 		this.agent.attendre();
@@ -184,7 +183,6 @@ public class ActionGestionTresorCollectifBehaviour extends OneShotBehaviour {
 				
 			} else {
 				// Si je ne suis pas à la position du trésor :
-				//System.out.println("**** " + this.agent.getLocalName() + " : Je ne me trouve pas à la position du trésor");
 				this.checkPartCommun_AttenteTresor_getMove();
 			}
 		} else {

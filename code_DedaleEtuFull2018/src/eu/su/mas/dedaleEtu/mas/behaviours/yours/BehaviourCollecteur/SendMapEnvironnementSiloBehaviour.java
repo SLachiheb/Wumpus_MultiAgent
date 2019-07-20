@@ -27,8 +27,6 @@ public class SendMapEnvironnementSiloBehaviour extends OneShotBehaviour {
 	
 	@Override
 	public void action() {
-		//System.out.println("**** " + this.agent.getLocalName() + " est dans SendMapEnvironnementBehaviour");
-
 		// 1) Creation d'un message :
 		ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
 		msg.setProtocol("CARTE_ENVIRRONEMENT");
@@ -48,10 +46,8 @@ public class SendMapEnvironnementSiloBehaviour extends OneShotBehaviour {
 		}
         // 5) Envoyer le message :
     	this.agent.sendMessage(msg);
-    	
-		//System.out.println("**** " + this.agent.getLocalName() + " j'envoie ma carte au silo " + actionTanker.getEtatTanker().getName());
-    	
-    	// 2) Reception des messages :
+    	    	
+    	// 6) Reception des messages :
 		MessageTemplate msgTemplate = MessageTemplate.and(
 				MessageTemplate.MatchPerformative(ACLMessage.INFORM),
 				MessageTemplate.MatchProtocol("CARTE_ENVIRRONEMENT"));
@@ -59,8 +55,6 @@ public class SendMapEnvironnementSiloBehaviour extends OneShotBehaviour {
 		ACLMessage msgRecu = this.agent.blockingReceive(msgTemplate, 700);
 		while(msgRecu != null) {
 			try {
-				//System.out.println("**** " + this.agent.getLocalName() + " Info : j'ai reçu la carte environnement de " + msgRecu.getSender().getLocalName());
-
 				Carte carteRecu = (Carte) msgRecu.getContentObject();
 				// MaJ de la carte
 				carteRecu.updateInsertCartes(this.agent.getCarteTresors(), this.agent.getCarteDangers());
@@ -74,7 +68,6 @@ public class SendMapEnvironnementSiloBehaviour extends OneShotBehaviour {
 	
 	@Override
 	public int onEnd(){
-		//System.out.println("**** " + this.agent.getLocalName() + " sort de SendMapEnvironnementBehaviour\n");
 		return AgentCollecteur.T_CHECK_SIGNAL_AFTER_SEND_MAP_ENV;
 	}
 

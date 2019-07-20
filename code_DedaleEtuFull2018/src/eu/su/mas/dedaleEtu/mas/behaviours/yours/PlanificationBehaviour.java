@@ -87,8 +87,6 @@ public class PlanificationBehaviour extends OneShotBehaviour {
 					// Reboot le compteur d'EchoMap :
 					this.agent.setRebootEchoMap();
 				}
-				// Reboot le compteur d'EchoMap :
-				//this.agent.setRebootEchoMap();
 				// Il y a eu des changements dans la carte après agrégation :
 				if (this.agent.getCarteExploration().getChangeMap() == true) {
 					this.searchNodesBut();
@@ -110,75 +108,57 @@ public class PlanificationBehaviour extends OneShotBehaviour {
 			case SignalSatisfaction :
 				// Est-ce que je suis en Exploration :
 				if (this.agent.getExploration() == true) {
-					//System.out.println("\n*******************> " + this.agent.getLocalName() + " ----> Je suis en Exploration");
 					// Oui, donc on continue l'Exploration :
 					this.numeroTransition = AgentAbstrait.P_EXPLORATION;
 				} else {
-					//System.out.println("\n*******************> " + this.agent.getLocalName() + " ----> Je ne suis plus en Exploration");
 					// Non, je ne suis plus en Exploration :
 					// Est-ce que je suis en explorationTresorPerdu :
 					if (this.agent.getExplorationTresorPerdu() == false) {
-						//System.out.println("\n*******************> " + this.agent.getLocalName() + " ----> Je ne suis pas en Exploration de trésor Perdu");
 						// Non, je ne suis pas en Exploration Tresor Perdu :
 						// Est-ce que je suis en action Collectif :
 						if (this.agent.getSearchTresorCollectif() == true) {
-							//System.out.println("\n*******************> " + this.agent.getLocalName() + " ----> Je suis en recherche de Tresor Collectif");
-							//System.out.println("\n*******************> " + this.agent.getLocalName() + " " + this.agent.getPosistionTresorCollectif());
-
 							// Oui, je suis en actionTresorCollectif :
 							this.numeroTransition = AgentExplorateur.T_ACTION_TRESOR_COLLECTIF_AFTER_PLANIFICATION;
 						} else {
-							//System.out.println("\n*******************> " + this.agent.getLocalName() + " ----> Je vais faire un Recherche Tresor Collectif");
 							// Non, je ne suis pas en action collectif :
 							this.numeroTransition = AgentExplorateur.T_TRESOR_COLLECTIF_EXPLO;
 						}
 					} else {
-						//System.out.println("\n*******************> " + this.agent.getLocalName() + " ----> Je suis en Exploration de trésor Perdu");
 						// Oui, Je suis en Exploration de trésor Perdu :
 						// Est-ce que je connais assez de tanker sur la Map :
 						if (this.agent.getPositionTanker().size() >= this.agent.getNbNodeVisitedSilo()) {
-							//System.out.println("\n*******************> " + this.agent.getLocalName() + " ----> Je connais assez de Tanker");
 							// Oui, je connais assez de tanker :
 							// Est-ce que j'ai atteinds le quota de No à visité :
 							if (this.agent.getCptNodeVisited() % this.agent.getIntervalleNodeExploTresor() == 0) {
-								//System.out.println("\n*******************> " + this.agent.getLocalName() + " ----> Je suis en intervalle Exploration Tresor Perdu");
 								// J'ai atteinds le nombre de node à visiter, aller faire la tournée des tankers:
 								// Si j'ai visité tout les tanker :
 								if (this.agent.getTourTanker().size() == 0) {
-									//System.out.println("\n*******************> " + this.agent.getLocalName() + " ----> J'ai fini mon tour");
 									this.agent.rebootCptNodeVisited();
 									this.agent.setTourTanker(this.agent.getPositionTanker());
 									this.numeroTransition = AgentAbstrait.P_P;
 								} else {
-									//System.out.println("\n*******************> " + this.agent.getLocalName() + " ----> Je continue mon tour");
 									this.numeroTransition = AgentAbstrait.T_TOUR_TANKER;
 								}
 							} else {
-								//System.out.println("\n*******************> " + this.agent.getLocalName() + " ----> Je ne suis pas en intervalle Exploration Tresor Perdu ");
 								// Si J'ai trouvé au moins un trésor, je vais informer les agent Silo :
 								if (/*this.isTresorAOuvrir()*/this.agent.getTresorPerdu() == true) {		
-									//System.out.println("\n*******************> " + this.agent.getLocalName() + " ----> J'ai trouvé un trésor ");
 									// Je ne peux pas ouvrir le tresor :
 									if (this.agent.getTourTanker().size() == 0) {
-										//System.out.println("\n*******************> " + this.agent.getLocalName() + " ----> J'ai fini mon tour ");
 										this.agent.rebootCptNodeVisited();
 										this.agent.setTourTanker(this.agent.getPositionTanker());
 										this.agent.setExplorationTresorPerdu(false);
 										this.agent.setTresorPerdu(false);
 										this.numeroTransition = AgentAbstrait.P_P;
 									} else {
-										//System.out.println("\n*******************> " + this.agent.getLocalName() + " ----> Je continue mon tour ");
 										this.numeroTransition = AgentAbstrait.T_TOUR_TANKER;
 									}
 								} else {
-									//System.out.println("\n*******************> " + this.agent.getLocalName() + " ----> Je continue mon Exploration Tresor Perdu");
 									// J'ai pas trouvé de trésor :
 									this.numeroTransition = AgentCollecteur.T_EXPLO_TRESOR_PERDU;
 								}
 							}
 						} else {
 							// Je ne connais pas assez de tanker :
-							//System.out.println("\n*******************> " + this.agent.getLocalName() + " ----> Je n'ai pas assez de tanker, recherche les Silos ");
 							this.numeroTransition = AgentAbstrait.P_RECHERCHE_SILO;
 						}
 					}
@@ -255,8 +235,6 @@ public class PlanificationBehaviour extends OneShotBehaviour {
 					// Reboot le compteur d'EchoMap :
 					this.agent.setRebootEchoMap();
 				}
-				// Reboot le compteur d'EchoMap :
-				//agentCollecteur.setRebootEchoMap();
 				// Il y a eu des changements dans la carte après agrégation :
 				if (agentCollecteur.getCarteExploration().getChangeMap() == true) {
 					this.searchNodesBut();
@@ -278,74 +256,57 @@ public class PlanificationBehaviour extends OneShotBehaviour {
 			case SignalSatisfaction :
 				// Est-ce que je suis en Exploration :
 				if (this.agent.getExploration() == true) {
-					//System.out.println("\n*******************> " + this.agent.getLocalName() + " ----> Je suis en Exploration");
 					// Oui, donc on continue l'Exploration :
 					this.numeroTransition = AgentCollecteur.P_EXPLORATION;
 				} else {
-					//System.out.println("\n*******************> " + this.agent.getLocalName() + " ----> Je ne suis plus en Exploration");
 					// Non, je ne suis plus en Exploration :
 					// Est-ce que je suis en explorationTresorPerdu :
 					if (this.agent.getExplorationTresorPerdu() == false) {
-						//System.out.println("\n*******************> " + this.agent.getLocalName() + " ----> Je ne suis pas en Exploration de trésor Perdu");
 						// Non, je ne suis pas en Exploration Tresor Perdu :
 						// Est-ce que je suis en action Collectif :
 						if (this.agent.getSearchTresorCollectif() == true) {
-							//System.out.println("\n*******************> " + this.agent.getLocalName() + " ----> Je suis en recherche de Tresor Collectif ");
 							// Oui, je suis en actionTresorCollectif :
 							this.numeroTransition = AgentCollecteur.T_ACTION_TRESOR_COLLECTIF_AFTER_PLANIFICATION;
-							//System.out.println("\n*******************> " + this.agent.getLocalName() + " " + this.agent.getPosistionTresorCollectif());
 						} else {
-							//System.out.println("\n*******************> " + this.agent.getLocalName() + " ----> Je vais faire un PDM");
 							// Non, je ne suis pas en action collectif :
 							this.numeroTransition = AgentCollecteur.T_PDM;
 						}
 					} else {
-						//System.out.println("\n*******************> " + this.agent.getLocalName() + " ----> Je suis en Exploration de trésor Perdu");
 						// Oui, Je suis en Exploration de trésor Perdu :
 						// Est-ce que je connais assez de tanker sur la Map :
 						if (this.agent.getPositionTanker().size() >= this.agent.getNbNodeVisitedSilo()) {
-							//System.out.println("\n*******************> " + this.agent.getLocalName() + " ----> Je connais assez de Tanker");
 							// Oui, je connais assez de tanker :
 							// Est-ce que j'ai atteinds le quota de No à visité :
 							if (this.agent.getCptNodeVisited() % this.agent.getIntervalleNodeExploTresor() == 0) {
-								//System.out.println("\n*******************> " + this.agent.getLocalName() + " ----> Je suis en intervalle Exploration Tresor Perdu");
 								// J'ai atteinds le nombre de node à visiter, aller faire la tournée des tankers:
 								// Si j'ai visité tout les tanker :
 								if (this.agent.getTourTanker().size() == 0) {
-									//System.out.println("\n*******************> " + this.agent.getLocalName() + " ----> J'ai fini mon tour");
 									this.agent.rebootCptNodeVisited();
 									this.agent.setTourTanker(this.agent.getPositionTanker());
 									this.numeroTransition = AgentAbstrait.P_P;
 								} else {
-									//System.out.println("\n*******************> " + this.agent.getLocalName() + " ----> Je continue mon tour");
 									this.numeroTransition = AgentAbstrait.T_TOUR_TANKER;
 								}
 							} else {
-								//System.out.println("\n*******************> " + this.agent.getLocalName() + " ----> Je ne suis pas en intervalle Exploration Tresor Perdu ");
 								// Si J'ai trouvé au moins un trésor, je vais informer les agent Silo :
 								if (/*this.isTresorAOuvrir()*/this.agent.getTresorPerdu() == true) {		
-									//System.out.println("\n*******************> " + this.agent.getLocalName() + " ----> J'ai trouvé un trésor ");
 									// Je ne peux pas ouvrir le tresor :
 									if (this.agent.getTourTanker().size() == 0) {
-										//System.out.println("\n*******************> " + this.agent.getLocalName() + " ----> J'ai fini mon tour ");
 										this.agent.rebootCptNodeVisited();
 										this.agent.setTourTanker(this.agent.getPositionTanker());
 										this.agent.setExplorationTresorPerdu(false);
 										this.agent.setTresorPerdu(false);
 										this.numeroTransition = AgentAbstrait.P_P;
 									} else {
-										//System.out.println("\n*******************> " + this.agent.getLocalName() + " ----> Je continue mon tour ");
 										this.numeroTransition = AgentAbstrait.T_TOUR_TANKER;
 									}
 								} else {
-									//System.out.println("\n*******************> " + this.agent.getLocalName() + " ----> Je continue mon Exploration Tresor Perdu");
 									// J'ai pas trouvé de trésor :
 									this.numeroTransition = AgentCollecteur.T_EXPLO_TRESOR_PERDU;
 								}
 							}
 						} else {
 							// Je ne connais pas assez de tanker :
-							//System.out.println("\n*******************> " + this.agent.getLocalName() + " ----> Je recherche les Silos ");
 							this.numeroTransition = AgentAbstrait.P_RECHERCHE_SILO;
 						}
 					}
@@ -418,8 +379,6 @@ public class PlanificationBehaviour extends OneShotBehaviour {
 					// Reboot le compteur d'EchoMap :
 					this.agent.setRebootEchoMap();
 				}
-				// Reboot le compteur d'EchoMap :
-				//this.agent.setRebootEchoMap();
 				// Il y a eu des changements dans la carte après agrégation :
 				if (this.agent.getCarteExploration().getChangeMap() == true) {
 					this.searchNodesBut();
@@ -475,10 +434,6 @@ public class PlanificationBehaviour extends OneShotBehaviour {
 	
 	/*Utiliser que par les agents Silo :*/
 	private void searchPositionSilo (AgentTanker agentTanker) {
-		// Recherche dans le graphe les noeuds de plus haut degré :
-		//List<Node> degreeNode = Toolkit.degreeMap(this.agent.getCarteExploration().getGraph());
-		// Recupérer le noeud du plus au dégrée pour le tanker (this) en fonction de son identifiant :
-		//Node positionTanker =  degreeNode.get(agentTanker.getIdTanker());
 		// Mettre à jour la position Tanker :
 		agentTanker.setPositionSilo(this.agent.getDegreeNode().positionTanker(agentTanker.getIdTanker()));//positionTanker.getId());
 		// Calculer le chemin pour aller de la position current à la position Tanker :
@@ -502,12 +457,12 @@ public class PlanificationBehaviour extends OneShotBehaviour {
 					// Selectionner un node goal :
 					this.selectNodeGoal();
 					// Reset variable EchoMap + shareMap :
-					this.agent.resetShareMap(); // A voir !!!!!
+					this.agent.resetShareMap();
 					this.numeroTransition = AgentExplorateur.T_CHECK_SIGNAUX_BOITE_LETTRE;
 				} else {
 					// Plus de noeud but a explorer :
 					// Reset variable EchoMap + shareMap :
-					this.agent.resetShareMap(); // A voir !!!!!
+					this.agent.resetShareMap();
 					// L'exploration est terminé (Fin de mission) :
 					this.agent.setIsExploration(false);
 					this.numeroTransition = AgentExplorateur.P_P; 
@@ -519,7 +474,6 @@ public class PlanificationBehaviour extends OneShotBehaviour {
 	private boolean isActiveEchoMap () {
 		boolean active = false;
 		if (this.agent.getCptEchoFlowdingMap() % this.agent.getIntervalleEchoMap() == 0) {
-			// Plus le critère d'attente après reception d'une carte : !!!!!!!!!!!!!!!!!!!!!!!
 			active = true;
 		}
 		return active;

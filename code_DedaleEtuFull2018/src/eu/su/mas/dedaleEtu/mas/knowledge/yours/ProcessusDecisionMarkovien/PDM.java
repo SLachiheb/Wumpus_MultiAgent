@@ -111,13 +111,6 @@ public class PDM implements Serializable {
 		// 4) Creation de l'état Vide + insertion de BD des etats :
 		Etat etatVide	= new EtatVide(this.compteurS);
 		this.S.put(this.compteurS++, etatVide);
-		
-		
-		// Affichage de tout les Etats :
-		/*System.out.println("*********************Affichage ETATS: ");
-		for (Map.Entry<Integer, Etat> entry : this.S.entrySet()) {
-			System.out.println(entry.getKey() + "\n" + entry.getValue() + "\n");
-		}*/
 	}
 	
 	/**
@@ -131,10 +124,6 @@ public class PDM implements Serializable {
 			if (entry.getValue() instanceof EtatTanker)
 				this.A.addActionTanker(new ActionTanker(this.compteurA++, (EtatTanker)entry.getValue()));
 		}
-		
-		// Affichage des actions :
-		/*System.out.println("*********************Affichage ACTIONS: ");
-		System.out.println(this.A);*/
 	}
 	
 	/**
@@ -192,16 +181,14 @@ public class PDM implements Serializable {
 				// Est-ce l'agentCollecteur peut collecter ce type de trésor :
 				if (this.agent.getMyTreasureType() == etatTresor.getTresor().getTypeTresor()) {
 					// L'agent peut collecter se type de trésor :
-					// Est-ce que l'agentCollecteur peut récuperer le trésor en 1 pick :
-					//if (this.agent.getBackPackFreeSpace() >= etatTresor.getTresor().getRessource()) {
-					
+					// Est-ce que l'agentCollecteur peut récuperer le trésor en 1 pick :					
 					// Calculer le nombre de pick pour récupérer le trésor en entier :
 					int nbPick = 0;
 					if (this.agent.getBackPackFreeSpace() != 0) {
 						// Combien de pick pour récupérer le tresor :
 						System.out.println(etatTresor.getname() + " " + nbPick);
 						System.out.println(etatTresor.getTresor().getRessource() + " " + this.agent.getBackPackFreeSpace());
-						nbPick = etatTresor.getTresor().getRessource() / this.agent.getBackPackFreeSpace(); //(division entière)
+						nbPick = etatTresor.getTresor().getRessource() / this.agent.getBackPackFreeSpace();
 						if (nbPick == 0) {
 							nbPick = 1;
 						}
@@ -210,12 +197,7 @@ public class PDM implements Serializable {
 					} else {
 						nbPick = 0;
 					}
-					
-					/*if (nbPick == 0) {
-						nbPick = 1;
-					}*/
 					// Score en fonction du nombre de pick :
-					
 					if (etatTresor.getTresor().getLockStatus() == 0) {
 						// Est-ce qu'il a assez d'expertise et de force : 
 						Set<Couple<Observation,Integer>> competence = this.agent.getMyExpertise();
@@ -257,11 +239,6 @@ public class PDM implements Serializable {
 			// MaJ de la recompense de l'état :
 			entry.getValue().setRecompense(score);
 		}
-		// Affichage de tout les Etats :
-		/*System.out.println("*********************Affichage ETATS AVEC RECOMPENSES: ");
-		for (Map.Entry<Integer, Etat> entry : this.S.entrySet()) {
-			System.out.println(entry.getKey() + "\n" + entry.getValue());
-		}*/
 	}
 	
 	/**
@@ -312,17 +289,10 @@ public class PDM implements Serializable {
 					if (couple.getLeft() == Observation.LOCKPICKING) {
 						if (couple.getRight() < tresor.getEtatTresor().getTresor().getLockpicking()) {
 							isValide = false;
-						} else {
-							//System.out.println("J'ai la compétence");
-						}
+						} 
 					}
 				}
 			}
-			
-			// Si mon sac est rempie au max :
-			/*if (tresor.getEtatTresor().getRecompense() > this.agent.getBackPackFreeSpace()) {
-				isValide = false;
-			}*/
 			
 			if (this.agent.getBackPackFreeSpace() == 0) {
 				isValide = false;
@@ -349,7 +319,6 @@ public class PDM implements Serializable {
 			// Modifie directement dans la matrice de transition + Normalisation :
 			for (ActionTresor tresor: tresorsValides) {
 				this.T[0][tresor.getEtatTresor().getId()][tresor.getIdAction()] = (nbTresors / somme);
-				//System.out.println("ooooooooooo" + (nbTresors / somme));
 				nbTresors--;
 			}
 		} 
@@ -390,23 +359,9 @@ public class PDM implements Serializable {
 				}
 			}
 		}
-		
-		// Affichage de tout les Etats :
-		/*System.out.println("*********************Affichage MATRICE DE TRANSITION : ");
-		for (int i=0; i < this.S.size() && i < 1; i++) {
-			System.out.print("Etat "+this.S.get(i).getname()+", \n");
-			for (int j=0; j < this.S.size(); j++) {
-				System.out.print(this.S.get(j).getname() +" : ");
-				for (int k=0; k < this.A.size(); k++) {
-					System.out.print("("+this.A.getActions().get(k) +", "+ this.T[i][j][k] + ") ");
-				}
-				System.out.println();
-			}
-		}*/
 	}
 	
 	private Action PL_PDM () {
-		//System.out.println("----------------------------PDM---------------------------------");
 		Action bestAction 	= null;
         try {
 			IloCplex cplex = new IloCplex();
@@ -439,13 +394,6 @@ public class PDM implements Serializable {
            cplex.exportModel("PDM.lp");
 	        
 	       if (cplex.solve()) {
-	           /*System.out.println("Solution status : " + cplex.getStatus() + "\n");
-	           System.out.println("Valeur objective : " + cplex.getObjValue() + "\n");
-	           */
-	          /* for (int i = 0; i < this.S.size(); i++) {
-				System.out.println ("V["+i+"] = " + cplex.getValue(V[i]) + "\n");
-	           }*/
-	           
 		        // Récupérer la décision (action) que nous devons prendre à l'état Position :
 				// Recherche l'indexPosition :
 				Integer indexPosition = null;
@@ -469,28 +417,14 @@ public class PDM implements Serializable {
 					choiceValue += this.gamma*som;
 					bd_value.put(this.A.getActions().get(a), choiceValue);
 				}
-				
-				/*// Affichage des actions et de leurs valeur :
-				for (Map.Entry<Action, Double> entry : bd_value.entrySet()) {
-					System.out.println(entry.getKey() + " : " + entry.getValue());
-				}*/
-				
 				// Récupérer la meilleurs action à faire :
 				Double bestValue	= Double.MIN_VALUE; // Attention 
 				for (Map.Entry<Action, Double> entry : bd_value.entrySet()) {
-					//System.out.println("IT0: " + entry.getKey() + ", " + entry.getValue() + "\n");
-					//System.out.println("IT0: " + bestValue+ ", " + entry.getValue() + "\n");
-
 					if (entry.getValue() > bestValue) {
-						//System.out.println("IT1: " + bestAction + ", " + bestValue + "\n");
 						bestAction = entry.getKey();
 						bestValue  = entry.getValue();
 					}
 				}
-				//System.out.println("INFO : " + bestAction + ", " + bestValue + "\n");
-	       }
-	       else  {
-				System.out.println("PBBBBBBBBBB");
 	       }
            cplex.end();
            return  bestAction;

@@ -18,9 +18,7 @@ public class CheckConfirmationProposalHelBehaviour extends OneShotBehaviour {
 		this.agent 				=   agentAbstrait;
 	}
 	@Override
-	public void action() {
-		//System.out.println("**** " + this.agent.getLocalName() + " est dans CheckConfirmationProposalHelBehaviour");
-		
+	public void action() {		
 		this.agent.attendre();
 		
 		// Attents durante nb seconde la réponse du géneur :
@@ -31,7 +29,6 @@ public class CheckConfirmationProposalHelBehaviour extends OneShotBehaviour {
 		ACLMessage msgRecu = this.agent.blockingReceive(msgTemplate, 500);
 		while(msgRecu != null) {
 			// Pas besoin de vérification car le destinataire du messsage à faire les vérifications requise.
-			//System.out.println("**** " + this.agent.getLocalName() + " à reçu un message de confirmation pour sa demande d'aide, donc il patiente.");
 			this.agent.setAttenteTresor(true);
 			// Next message dans la boite au lettre :
 			msgRecu = this.agent.receive(msgTemplate);
@@ -40,7 +37,6 @@ public class CheckConfirmationProposalHelBehaviour extends OneShotBehaviour {
 
 	@Override
 	public int onEnd(){
-		//System.out.println("**** " + this.agent.getLocalName() + " sort de CheckConfirmationProposalHelBehaviour");
 		return AgentAbstrait.T_CHECK_SIGNAL_AFTER_CHECK_CONFIRMATION_HELP;
 	}
 }

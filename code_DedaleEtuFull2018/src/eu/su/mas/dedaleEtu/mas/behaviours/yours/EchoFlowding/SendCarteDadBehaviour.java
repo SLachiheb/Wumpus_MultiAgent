@@ -29,29 +29,16 @@ public class SendCarteDadBehaviour extends OneShotBehaviour{
 	
 	@Override
 	public void action() {
-		//System.out.println("**** " + this.agent.getLocalName() + " <---- est dans SendCarteDadBehaviour");
-
 		// Creation d'un message :
 		ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
 		msg.setProtocol("CARTE_DAD");
 		// Modifier l'expéditeur du message :
 		msg.setSender(this.getAgent().getAID());
 		// Ajouter un destinataire :
-		msg.addReceiver(this.agent.getEchoFlowding().getDad());
-		
-		
-		//System.out.println("***********************" + this.agent.getEchoFlowding().getDad());
-		//System.out.println("***********************" + this.agent.getEchoFlowding());
-
-		
-		//System.out.println(this.agent.getLocalName() + " sendMAP au Dad " + this.agent.getEchoFlowding().getDad().getLocalName());
-		
+		msg.addReceiver(this.agent.getEchoFlowding().getDad());		
         // Rendre le carteExploration serializable :
         SerializableCarteExploration carteExploSerializable = new SerializableCarteExploration
-        		(this.agent.getCarteExploration());
-        
-        //System.out.println(this.agent.getLocalName() + " Avant : \n" + carteExploSerializable);
-        
+        		(this.agent.getCarteExploration());        
         // Creation de l'identifiant :
         Identifiant id = new Identifiant(this.agent.getLocalName(), this.agent.getIdAgent());
         Carte msgCarte = new Carte(id,carteExploSerializable , this.agent.getCarteTresors(),
@@ -61,10 +48,8 @@ public class SendCarteDadBehaviour extends OneShotBehaviour{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-    
         // Envoie de la carte au destinataire qui est le père :
 		this.agent.sendMessage(msg);	
-		
 		// Modification de la transition :
 		this.numberTransition = AgentExplorateur.T_WAIT_CARTE_DAD;
 	}
@@ -72,7 +57,6 @@ public class SendCarteDadBehaviour extends OneShotBehaviour{
 	
 	@Override
 	public int onEnd(){
-		//System.out.println("**** " + this.agent.getLocalName() + " ----> sort de SendCarteDadBehaviour\n");
 		return this.numberTransition;
 	}
 

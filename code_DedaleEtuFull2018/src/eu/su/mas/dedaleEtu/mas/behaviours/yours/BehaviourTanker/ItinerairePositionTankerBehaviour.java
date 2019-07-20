@@ -22,9 +22,7 @@ public class ItinerairePositionTankerBehaviour extends OneShotBehaviour {
 
 	@Override
 	public void action() {
-		//System.out.println("**** " + this.agent.getLocalName() + " est dans IntinerairePositionTanker");
 		this.agent.setStrategie(Strategie.IntinerairePositionSilo);
-
 		this.agent.attendre();
 		this.agent.updateCarte();
 		
@@ -56,13 +54,12 @@ public class ItinerairePositionTankerBehaviour extends OneShotBehaviour {
 		
 		if (this.agent.getIsMove()) {
 			// Entretient du chemin dans les données de l'agent :
-			this.agent.cheminButRemove(0); // Supprime l'élément current si on a pu bougé
+			this.agent.cheminButRemove(0); // Supprime l'élément current si on a pu bouger
 		}
 	}
 	
 	@Override
 	public int onEnd(){
-		//System.out.println("**** " + this.agent.getLocalName() + " sort de IntinerairePositionTanker");
 		return AgentTanker.T_PLANIFICATION_AFTER_ITINERAIRE_SILO;
 	}
 

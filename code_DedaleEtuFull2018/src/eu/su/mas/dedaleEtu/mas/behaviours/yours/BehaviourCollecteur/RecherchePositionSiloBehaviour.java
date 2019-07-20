@@ -24,7 +24,6 @@ public class RecherchePositionSiloBehaviour extends OneShotBehaviour {
 	
 	@Override
 	public void action() {
-		//System.out.println("**** " + this.agent.getLocalName() + " est dans RecherchePositionSiloBehaviour");
 		this.agent.setStrategie(Strategie.RecherchePositionSilo);
 
 		this.agent.attendre();
@@ -35,21 +34,16 @@ public class RecherchePositionSiloBehaviour extends OneShotBehaviour {
 		if (this.agent.getNodesBut().isEmpty() == true) {
 			if (this.agent.getNodeCloseSilo().isEmpty() == true && this.agent.getNodeOpenSilo().isEmpty() == true) {
 				// Cela veut dire, qu'on a pas encore rechercher de position Silo potentiel à visiter :
-				
-				// Recherche dans le graphe les noeuds de plus haut degré :
-				//List<Node> degreeNode = Toolkit.degreeMap(this.agent.getCarteExploration().getGraph());
-				
 				// Récupérer Nb à visiter pour trouver un Tanker :
-				if (this.agent.getNbNodeVisitedSilo() <= this.agent.getCarteExploration().getGraph().getNodeCount()) {// degreeNode.size()) {
+				if (this.agent.getNbNodeVisitedSilo() <= this.agent.getCarteExploration().getGraph().getNodeCount()) {
 					for (int i=0; i < this.agent.getNbNodeVisitedSilo(); i++) {
 						// Ajoute dans les noeuds à visiter pour le collecteur pour trouver le tanker :
-						this.agent.getNodeOpenSilo().add(this.agent.getDegreeNode().positionTanker(i));//degreeNode.get(i).getId());
+						this.agent.getNodeOpenSilo().add(this.agent.getDegreeNode().positionTanker(i));
 					}
 				} else {
 					// on prend pour la nombre de noeud à visiter pour trouver un Silo : degreeNode.size()
-					for (int i=0; i < this.agent.getCarteExploration().getGraph().getNodeCount()/*degreeNode.size()*/; i++) {
+					for (int i=0; i < this.agent.getCarteExploration().getGraph().getNodeCount(); i++) {
 						// Ajoute dans les noeuds à visiter pour le collecteur pour trouver le tanker :
-						//this.agent.getNodeOpenSilo().add(degreeNode.get(i).getId());
 						this.agent.getNodeOpenSilo().add(this.agent.getDegreeNode().positionTanker(i));
 					}
 				}
@@ -60,7 +54,7 @@ public class RecherchePositionSiloBehaviour extends OneShotBehaviour {
 				// Supprimer le dernier noeud qui représente la position du tanker :
 				if (cheminBut.isEmpty() == true) {
 					// Prendre un noeud voisin à l'agent silo si on se trouve déjà sur la position du tanker:
-					//Liste des observables à partir de la position actuelle de l'agent
+					// Liste des observables à partir de la position actuelle de l'agent
 					List<Couple<String,List<Couple<Observation,Integer>>>> lobs= this.agent.observe();
 					//Parcours les observables pour voir si l'agentX est son voisin :
 					for (Couple<String,List<Couple<Observation,Integer>>> obs: lobs) {
@@ -73,7 +67,6 @@ public class RecherchePositionSiloBehaviour extends OneShotBehaviour {
 					int taille = cheminBut.size();
 					cheminBut.remove(taille-1);
 				}
-				
 				// Supprime des noeuds ouverts + Insertion dans les noeuds fermées:
 				this.agent.getNodeCloseSilo().add(this.agent.getNodeOpenSilo().remove(0));
 				// Mettre à jour le nouveau cheminBut :
@@ -85,7 +78,6 @@ public class RecherchePositionSiloBehaviour extends OneShotBehaviour {
 					this.agent.setNodeOpenSilo(new ArrayList<String>(this.agent.getNodeCloseSilo()));
 					this.agent.getNodeCloseSilo().clear();
 				}
-
 				// Calculer le chemin pour aller de la position current à la position Tanker :
 				List<String> cheminBut = this.agent.getCarteExploration().getShortestPath(this.agent.getCurrentPosition(), this.agent.getNodeOpenSilo().get(0));
 				
@@ -110,10 +102,6 @@ public class RecherchePositionSiloBehaviour extends OneShotBehaviour {
 				this.agent.getNodeCloseSilo().add(this.agent.getNodeOpenSilo().remove(0));
 				// Mettre à jour le nouveau cheminBut :
 				this.agent.setCheminPlanification(cheminBut);
-
-				/*if(this.agent.getNodesBut().isEmpty() == false) {
-					this.seDeplacer();
-				}*/
 			}
 		} else {
 			// Si il me reste des nodes à visiter :
@@ -127,13 +115,12 @@ public class RecherchePositionSiloBehaviour extends OneShotBehaviour {
 		
 		if (this.agent.getIsMove()) {
 			// Entretient du chemin dans les données de l'agent :
-			this.agent.cheminButRemove(0); // Supprime l'élément current si on a pu bougé
+			this.agent.cheminButRemove(0); // Supprime l'élément current si on a pu bouger
 		}
 	}
 		
 	@Override
 	public int onEnd(){
-		//System.out.println("**** " + this.agent.getLocalName() + " sort de RecherchePositionSiloBehaviour");
 		return AgentCollecteur.T_CHECK_SIGNAL_AFTER_RECHERCHE_POSITION_SILO;
 	}
 }

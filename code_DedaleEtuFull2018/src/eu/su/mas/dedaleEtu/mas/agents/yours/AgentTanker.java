@@ -106,7 +106,6 @@ public class AgentTanker extends AgentAbstrait {
 	 * @return
 	 */
 	public List<String> searchChemin_isAbandonTask () {
-		//System.out.println("*****" + this.getLocalName() + " : ABANDON");
 		ArrayList<String> cheminFind = new ArrayList<String>();
 		
 		// Ajoute dans les noeuds closes, le noeud faisant pas parti de mon noeud courant :
@@ -120,7 +119,7 @@ public class AgentTanker extends AgentAbstrait {
 		if (nodeCloses.isEmpty() == false) {
 			// Recherche tout les chemins allant de ma position à un noeud close :
 			List<List<String>> list_chemin_close = this.getCarteExploration().getShortestPathNodes(this.getCurrentPosition(),
-					new ArrayList<String>(nodeCloses), (nodeCloses.size() /*/ 2*/)/*5*/);		
+					new ArrayList<String>(nodeCloses), (nodeCloses.size());		
 			
 			if (this.getNodesBut().isEmpty() == false) {
 				// Supprime les chemins passant par le noeud bloqué :

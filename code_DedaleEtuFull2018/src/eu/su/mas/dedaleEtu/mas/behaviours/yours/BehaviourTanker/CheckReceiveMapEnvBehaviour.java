@@ -25,9 +25,7 @@ public class CheckReceiveMapEnvBehaviour extends OneShotBehaviour {
 
 	@Override
 	public void action() {
-		//System.out.println("**** " + this.agent.getLocalName() + " est dans CheckReceiveMapEnvBehaviour");
 		this.agent.setStrategie(Strategie.CheckReceiveMapEnv);
-
 		
 		// 2) Reception des messages :
 		MessageTemplate msgTemplate = MessageTemplate.and(
@@ -40,7 +38,6 @@ public class CheckReceiveMapEnvBehaviour extends OneShotBehaviour {
 				Carte carteRecu = (Carte) msgRecu.getContentObject();
 				// MaJ de la carte
 				carteRecu.updateInsertCartes(this.agent.getCarteTresors(), this.agent.getCarteDangers());
-				
 				// Pour chaque message reçu par le tanker, il envoie une réponse à avec sa carte :
 				// 1) Creation d'un message :
 				ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
@@ -62,7 +59,6 @@ public class CheckReceiveMapEnvBehaviour extends OneShotBehaviour {
 			} catch (UnreadableException e) {
 				e.printStackTrace();
 			}
-			
 			// Next message dans la boite au lettre :
 			msgRecu = this.agent.receive(msgTemplate);
 		} 	
@@ -70,7 +66,6 @@ public class CheckReceiveMapEnvBehaviour extends OneShotBehaviour {
 
 	@Override
 	public int onEnd(){
-		//System.out.println("**** " + this.agent.getLocalName() + " sort de CheckReceiveMapEnvBehaviour");
 		return AgentTanker.T_PLANIFICATION_AFTER_CHECK_MAP_ENV;
 	}
 }

@@ -45,37 +45,10 @@ public class CarteTresors implements Serializable {
 				Tresor oldTresor = this.carteTresor.get(position);
 				// Creation d'un nouveau Tresor potentiel
 				Tresor newTresor = new Tresor(lObs);
-				// Si il n'y a pas de ressource pour le nouveau trésor :
-				/*if (newTresor.isSansTresor() == true) {
-					System.out.println("Sans ressources");
-					if (newTresor.getDate().after(oldTresor.getDate())) {
-						System.out.println("le newTresor est plus recent");
-						System.out.println(newTresor.getDate());
-						System.out.println(oldTresor.getDate());
-
-						//this.carteTresor.remove(position);
-						System.out.println("*******************> \n"  + this.getCarteTresors());
-						this.getTresorSupprime().add(position);
-						System.out.println("**REMOVE \n"  + this.carteTresor.remove(position));
-					} else {
-						System.out.println("le newTresor est moins recent");
-						System.out.println(newTresor.getDate());
-						System.out.println(oldTresor.getDate());
-						// Mise a jour
-						oldTresor.updateObservations(newTresor);
-					}
-				} else {
-					// Mise a jour
-					oldTresor.updateObservations(newTresor);
-				}*/
 				oldTresor.updateObservations(newTresor);
 				if (oldTresor.isSansTresor() == true) {
-					System.out.println("*******************> \n"  + this.getCarteTresors());
 					this.getTresorSupprime().add(position);
-					System.out.println("**REMOVE \n"  + this.carteTresor.remove(position));
-					//this.carteTresor.remove(position);
 				}
-				//this.date = new Date(); //
 			}else {
 				// Creation d'un Tresor
 				Tresor newTresor = new Tresor (lObs);
@@ -84,7 +57,6 @@ public class CarteTresors implements Serializable {
 					this.carteTresor.put(position, newTresor);
 					return true;
 				}
-				//this.date = new Date(); //
 			}
 		}
 		return false;
@@ -116,20 +88,15 @@ public class CarteTresors implements Serializable {
 				// Test si le tresor est vide :
 				if (oldTresor.isSansTresor() == true) {
 					//this.carteTresor.remove(position);
-					System.out.println("*******************> \n"  + this.getCarteTresors());
-					this.getTresorSupprime().add(position);
-					System.out.println("**REMOVE \n"  + this.carteTresor.remove(position));
-					
+					this.getTresorSupprime().add(position);					
 				}
 			}else {
 				// Si la date de rafrichisement de la carte est antérieur à la date du tresor :
-				//if (this.date.before(tresor.getDate())) {
-					if (tresor.isSansTresor() == false) {
-						// Verifie si le tresor n'est pas vide :
-						// Insertion du tresor qui n'est pas dans la HashMap
-						this.carteTresor.put(position, tresor);			
-					}
-				//}
+				if (tresor.isSansTresor() == false) {
+					// Verifie si le tresor n'est pas vide :
+					// Insertion du tresor qui n'est pas dans la HashMap
+					this.carteTresor.put(position, tresor);			
+				}
 			}
 		}
 		
@@ -281,10 +248,6 @@ public class CarteTresors implements Serializable {
 		 */
 		public Integer getRessource () {
 			return this.gold + this.diamond;
-			/*if (this.getTypeTresor() == Observation.GOLD)
-				return this.gold;
-			else 
-				return this.diamond;*/
 		}
 		public Date    getDate() {return this.date;}
 		public Integer getLockStatus () {return this.lockIsOpen;}

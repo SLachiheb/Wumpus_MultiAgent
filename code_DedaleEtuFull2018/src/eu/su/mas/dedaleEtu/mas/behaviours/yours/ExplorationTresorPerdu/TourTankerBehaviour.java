@@ -24,9 +24,7 @@ public class TourTankerBehaviour extends OneShotBehaviour {
 	}
 	
 	@Override
-	public void action() {
-		//System.out.println("**** " + this.agent.getLocalName() + " est dans TourTankerBehaviour");
-		
+	public void action() {		
 		// Patienter :
 		this.agent.attendre();
 
@@ -58,11 +56,7 @@ public class TourTankerBehaviour extends OneShotBehaviour {
 			
 			// 2) Rechercher le prochain Tanker à visiter :
 			if (this.agent.getTourTanker().size() > 0) {
-				// Cela veut dire, qu'il reste des tankers à visiter :
-				// Calculer le chemin pour aller de la position current à la position Tanker :
-				//System.out.println("Tour des Tankers : " + this.agent.getTourTanker());
-				//System.out.println("Tour des Tankers : " + this.agent.getTourTanker().get(0));
-
+				// Cela veut dire, qu'il reste des tankers à identifier :
 				List<String> cheminBut = this.agent.getCarteExploration().getShortestPath(this.agent.getCurrentPosition()
 						, this.agent.getTourTanker().get(0));
 				// Supprime le but tanker à visiter:
@@ -105,13 +99,12 @@ public class TourTankerBehaviour extends OneShotBehaviour {
 		
 		if (this.agent.getIsMove()) {
 			// Entretient du chemin dans les données de l'agent :
-			this.agent.cheminButRemove(0); // Supprime l'élément current si on a pu bougé
+			this.agent.cheminButRemove(0); 
 		}
 	}
 		
 	@Override
 	public int onEnd(){
-		//System.out.println("**** " + this.agent.getLocalName() + " sort de TourTankerBehaviour");
 		return AgentAbstrait.T_CHECK_SIGNAUX_AFTER_TOUR_TANKER;
 	}
 

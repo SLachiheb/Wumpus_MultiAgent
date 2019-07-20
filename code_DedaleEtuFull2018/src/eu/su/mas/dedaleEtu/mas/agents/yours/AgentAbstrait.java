@@ -111,9 +111,9 @@ public class AgentAbstrait extends AbstractDedaleAgent implements Serializable {
 	protected 	ArrayList<String>	nodeCloseSiloExploTresor;
 	protected 	ArrayList<String>	tourTanker;
 	protected 	String				tankerEnCours;
-	/*Determiner la position du Silo à coup sûr :*/
+	/*Determiner la position du Silo */
 	protected 	DegreeNode			degreeNode;
-	/*Savoir si on a rencontré un trésor perdu durant l'exploration : */
+	/*Savoir si on a rencontré un trésor perdu durant l'exploration */
 	protected 	boolean				tresorsPerdus;
 	
 	protected 	boolean				abandon;
@@ -187,9 +187,9 @@ public class AgentAbstrait extends AbstractDedaleAgent implements Serializable {
     	this.idAgent = AgentExplorateur.compteurAgent;
     	AgentExplorateur.compteurAgent++;
     	
-    	this.nbNodeVisitedSilo 		= 1; /*************************************/
-    	this.intervalleNodeVisited	= 30;/*************************************/
-    	this.cptNodeVisited			= 0;
+    	this.nbNodeVisitedSilo 		= 1;
+    	this.intervalleNodeVisited	= 30;
+        this.cptNodeVisited			= 0;
     	this.cptTankerVisited		= 0;
     }
     
@@ -227,7 +227,6 @@ public class AgentAbstrait extends AbstractDedaleAgent implements Serializable {
     	this.isCheckEcho = false;
     	this.compteurEchoFlowdingMap = 0;
     	this.cheminBut = new ArrayList<String> ();
-    	
     	this.positionTanker = new HashMap<String, String>();
     	// Ouverture coffre collectif :
     	this.actionStatisfaction		= false;
@@ -242,7 +241,6 @@ public class AgentAbstrait extends AbstractDedaleAgent implements Serializable {
     	this.tourTanker					= new ArrayList<String>();
     	this.isExplorationPerdu			= false;
     	this.isTourneeTanker			= false;
-    	//
 		// Declaration de la FSM la FSM de base pour chaque agent :
 		this.declaration_FSM();
 		
@@ -424,14 +422,6 @@ public class AgentAbstrait extends AbstractDedaleAgent implements Serializable {
 		}
 	}
 	
-	public void attendre () {
-		/*try {
-			this.doWait(400);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}*/
-	}
-	
 	/**
 	 * MaJ de la carte des Tresors et des Dangers à chaque pas :
 	 */
@@ -536,7 +526,6 @@ public class AgentAbstrait extends AbstractDedaleAgent implements Serializable {
 	public String				getTankerVisited () 			{return this.tankerEnCours;}
 	public DegreeNode			getDegreeNode()					{return this.degreeNode;}
 	public boolean				getTresorPerdu()				{return this.tresorsPerdus;}
-	
 	public boolean				getAbandon()					{return this.abandon;}
 	public void					setAbandon(boolean value)		{this.abandon = value;}
 
@@ -585,7 +574,6 @@ public class AgentAbstrait extends AbstractDedaleAgent implements Serializable {
 		this.compteurEchoFlowdingMap += 1;
 	}
 	public void setRebootEchoMap () {
-		// 1 pour ne pas faire l'echoMap à la prochaine itérarion :
 		this.compteurEchoFlowdingMap = 1;
 	}
 	public void setShareMap (boolean value) {

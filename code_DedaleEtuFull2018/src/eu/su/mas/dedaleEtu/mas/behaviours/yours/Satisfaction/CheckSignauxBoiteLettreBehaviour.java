@@ -48,7 +48,6 @@ public class CheckSignauxBoiteLettreBehaviour extends OneShotBehaviour {
 
 	@Override
 	public void action() {
-		//System.out.println("**** " + this.agent.getLocalName() + "<---- est dans CheckSignauxBoiteLettre");	
 		this.agent.setStrategie(Strategie.SignalSatisfaction);
 
 		// 0) Re-initialisation des données :
@@ -67,10 +66,6 @@ public class CheckSignauxBoiteLettreBehaviour extends OneShotBehaviour {
 				// Maj des signaux Interactifs de la satisfaction de l'agent :
 				try {
 					SignalInterblocage newSignal = (SignalInterblocage) msgSignalRecu.getContentObject();
-					// Affichage :
-					//System.out.println(this.agent.getLocalName() + " <---- Reçoit le protocole =  " +
-					//		" avec le protocole : " + msgSignalRecu.getProtocol() + " de " +
-					//		msgSignalRecu.getSender().getLocalName() + " ,content= \n "+ newSignal);
 					// 1er étape : Vérifie si le message n'est pas ancien + MaJ de la base de donnée :
 					if (this.agent.getSatisfaction().isValideBdSignal(msgSignalRecu.getSender(), newSignal)) {
 						// 2ème étape : Vérifie si l'agent est bien a une distance de 1 arc de l'expéditeur :
@@ -81,25 +76,15 @@ public class CheckSignauxBoiteLettreBehaviour extends OneShotBehaviour {
 								// 4 ème étape : Vérifier qu'il ne prenne pas en compte de l'agent déjà pris en compte dans le signal actuel :
 								if (this.agent.getSatisfaction().getSignal() == null) {
 									this.signals.add(newSignal);
-									//System.out.println("-------> Signal == null \n");
 								} else {
 									String expediteurNew = newSignal.getIdentifiant().getExpediteur();
 									String expediteurAncien = this.agent.getSatisfaction().getSignal().getIdentifiant().getExpediteur();
 									if (expediteurNew.equals(expediteurAncien) == false) {
 										this.signals.add(newSignal);
-										//System.out.println("------->signal non en cours\n");
-									} else {
-										//System.out.println("------->expediteurNew déja pris en compte par expediteurAncien\n");
 									}
 								}
-							} else {
-								//System.out.println("-------> Mauvaise direction \n");
-							}
-						} else {
-							//System.out.println("-------> Pas voisin\n");
-						}
-					} else {
-						//System.out.println("-------> Pas isValideBdSignal\n");
+							} 
+						} 
 					}
 				} catch (UnreadableException e) {
 					//System.out.println("Le contenu du message ne contient pas un objet SignalInterbocage");
@@ -127,9 +112,7 @@ public class CheckSignauxBoiteLettreBehaviour extends OneShotBehaviour {
 			this.numTransition = AgentExplorateur.T_ALTRUISTE;	
 		} else {
 			this.numTransition = AgentExplorateur.T_EGOISTE;	
-		}
-		
-		//System.out.println("\n1)" + this.agent.getLocalName() + " : \n" + this.agent.getSatisfaction());
+		}		
 	}
 	
 	/**
@@ -151,7 +134,6 @@ public class CheckSignauxBoiteLettreBehaviour extends OneShotBehaviour {
 	
 	@Override
 	public int onEnd(){
-		//System.out.println("**** " + this.agent.getLocalName() + "----> sort de CheckSignauxBoiteLettre\n");
 		return this.numTransition;
 	}
 

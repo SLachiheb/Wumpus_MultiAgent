@@ -22,21 +22,15 @@ public class PurgeDataEchoFlowdingBehaviour extends OneShotBehaviour{
 	}
 
 	@Override
-	public void action() {
-		
-		//System.out.println("**** " + this.agent.getLocalName() + " <---- est dans PurgeDataEchoFlowdingBehaviour");
-		
+	public void action() {		
 		// Reboot des données de l'echoFlrowding :
-		this.agent.getEchoFlowding().purgeData();		
-		//EchoFlowding.printEchoFlowding();
-		
+		this.agent.getEchoFlowding().purgeData();				
 		// Changement de transition dans le graphe d'état :
 		this.numTransition = AgentExplorateur.T_PRUGE_ECHOFLOWDING_TO_PLANIFICATION;
 	}
 	
 	@Override
 	public int onEnd() {
-		//System.out.println("**** " + this.agent.getLocalName() + " ----> sorts PurgeDataEchoFlowdingBehaviour\n");
 		return this.numTransition;
 	}
 }

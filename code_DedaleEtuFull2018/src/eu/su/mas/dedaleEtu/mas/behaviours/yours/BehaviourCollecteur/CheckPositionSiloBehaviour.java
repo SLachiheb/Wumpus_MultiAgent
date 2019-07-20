@@ -29,7 +29,6 @@ public class CheckPositionSiloBehaviour extends OneShotBehaviour {
 	
 	@Override
 	public void action() {
-		//System.out.println("**** " + this.agent.getLocalName() + " est dans ReceivePositionSilo");
 		this.agent.setStrategie(Strategie.CheckPositionSilo);
 
 		// Reboot :
@@ -42,7 +41,6 @@ public class CheckPositionSiloBehaviour extends OneShotBehaviour {
 
 		ACLMessage msgRecuPositionSilo = this.agent.receive(msgTemplate);
 		while(msgRecuPositionSilo != null) {
-			//System.out.println("\n*******************> " + this.agent.getLocalName() + " -> J'ai recu la position d'un Tanker\n");
 			// Ajoute dans la liste à contacter :
 			this.listSilo.add(msgRecuPositionSilo.getSender());
 			// Récupérer le contenu du message : 
@@ -81,7 +79,6 @@ public class CheckPositionSiloBehaviour extends OneShotBehaviour {
 
 	@Override
 	public int onEnd(){
-		//System.out.println("**** " + this.agent.getLocalName() + " sort de ReceivePositionSilo");
 		return this.numTransition;
 	}
 }

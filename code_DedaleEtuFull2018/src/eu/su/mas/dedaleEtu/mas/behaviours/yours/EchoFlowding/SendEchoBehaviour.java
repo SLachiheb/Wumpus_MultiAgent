@@ -30,8 +30,6 @@ public class SendEchoBehaviour extends OneShotBehaviour{
 	
 	@Override
 	public void action() {
-		//System.out.println("**** " + this.agent.getLocalName() + "<---- est dans SendEchoBehaviour");
-
 		// 1) Creation d'un message :
 		ACLMessage msg = new ACLMessage(ACLMessage.PROPOSE);
 		msg.setProtocol("ECHO");
@@ -48,8 +46,6 @@ public class SendEchoBehaviour extends OneShotBehaviour{
                 for (DFAgentDescription agent : resultats) {
                 	// Ne communique ni avec son pere et ni avec lui même :
                 	if (!this.agent.getEchoFlowding().getNoEcho().contains(agent.getName()) &&  agent.getName().equals(this.getAgent().getAID()) == false) {
-                    	//System.out.println(this.agent.getLocalName() + "----> echo" + this.agent.getEchoFlowding().getProtocolEcho().getNumEcho()
-                    	//		+" de protocole : " + this.agent.getEchoFlowding().getProtocolEcho() + " à " + agent.getName().getLocalName());
                     	// Ajout les expéditeurs du message :
                     	msg.addReceiver(agent.getName());
                 	}
@@ -63,7 +59,6 @@ public class SendEchoBehaviour extends OneShotBehaviour{
         try {
 			msg.setContentObject(this.agent.getEchoFlowding().getProtocolEcho());
 		} catch (IOException e) {
-			//System.out.println("Error : SendEchoBehaviour --> setContentObject");
 			e.printStackTrace();
 		}
         
@@ -80,7 +75,6 @@ public class SendEchoBehaviour extends OneShotBehaviour{
 	
 	@Override
 	public int onEnd(){
-		//System.out.println("**** " + this.agent.getLocalName() + " ----> sort de SendEchoBehaviour\n");
 		return AgentExplorateur.T_ATTENDRE_CONFIRMATION_FILS;
 	}
 

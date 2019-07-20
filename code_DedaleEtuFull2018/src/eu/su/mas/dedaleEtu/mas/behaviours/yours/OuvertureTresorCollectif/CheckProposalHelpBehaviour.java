@@ -25,9 +25,7 @@ public class CheckProposalHelpBehaviour extends OneShotBehaviour {
 	}
 	
 	@Override
-	public void action() {
-		//System.out.println("**** " + this.agent.getLocalName() + " est dans CheckProposalHelpBehaviour");
-		
+	public void action() {		
 		this.agent.attendre();
 		
 		MessageTemplate msgTemplate = MessageTemplate.and(
@@ -36,8 +34,6 @@ public class CheckProposalHelpBehaviour extends OneShotBehaviour {
 
 		ACLMessage msgRecu = this.agent.receive(msgTemplate);
 		while(msgRecu != null) {
-			//System.out.println("**** " + this.agent.getLocalName() + " : j'ai reçu une proposition d'aide de " + msgRecu.getSender().getLocalName());
-
 			Carte carteRecu = null;
 			try {
 				carteRecu = (Carte) msgRecu.getContentObject();
@@ -48,9 +44,7 @@ public class CheckProposalHelpBehaviour extends OneShotBehaviour {
 			}
 			// Est-ce qu'il est voisin de ma position et qu'il va vers le même tresor que moi:
 			if (this.isVoisin(carteRecu.getIdentifiant().getPositionExpediteur()) )
-				if (this.agent.getPosistionTresorCollectif().equals(carteRecu.getPositionTresor())) {
-					//System.out.println("**** " + this.agent.getLocalName() + " : j'accepte son aide de " + msgRecu.getSender().getLocalName());
-		
+				if (this.agent.getPosistionTresorCollectif().equals(carteRecu.getPositionTresor())) {		
 					// Envoyer une confirmation d'acceptation de proposition d'aide :
 					ACLMessage msg = new ACLMessage(ACLMessage.ACCEPT_PROPOSAL);
 					msg.setProtocol("HELP");
@@ -60,10 +54,7 @@ public class CheckProposalHelpBehaviour extends OneShotBehaviour {
 					msg.addReceiver(msgRecu.getSender());
 			        // 5) Envoyer le message :
 			    	this.agent.sendMessage(msg);
-				} else {
-					//System.out.println("**** " + this.agent.getLocalName() + " : je refuse son aide car on a pas le même trésor en vue avec " + msgRecu.getSender().getLocalName());
-			} else {
-				//System.out.println("**** " + this.agent.getLocalName() + " : je refuse son aide car on est pas voisin avec " + msgRecu.getSender().getLocalName());
+			    }
 			}
 			// Next message dans la boite au lettre :
 			msgRecu = this.agent.receive(msgTemplate);
@@ -89,7 +80,6 @@ public class CheckProposalHelpBehaviour extends OneShotBehaviour {
 	
 	@Override
 	public int onEnd(){
-		//System.out.println("**** " + this.agent.getLocalName() + " sort de CheckProposalHelpBehaviour");
 		return AgentAbstrait.T_CHECK_SIGNAL_AFTER_CHECK_PROPOSAL_HELP;
 	}
 }

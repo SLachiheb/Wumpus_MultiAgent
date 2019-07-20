@@ -30,8 +30,6 @@ public class SendCarteSonsBehaviour extends OneShotBehaviour {
 	
 	@Override
 	public void action() {
-		//System.out.println("**** " + this.agent.getLocalName() + " ----> est dans SendCarteSonsBehaviour");
-
 		// Creation d'un message :
 		ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
 		msg.setProtocol("X");
@@ -39,17 +37,13 @@ public class SendCarteSonsBehaviour extends OneShotBehaviour {
 		msg.setSender(this.getAgent().getAID());
 		// Ajouter les destinataires :
 		for(AID son: this.agent.getEchoFlowding().getSons()) {
-			//System.out.println("**** " + this.agent.getLocalName() +" sendMap au fils " +son.getLocalName());
 			msg.addReceiver(son);
-
 		}	
 		
         // Rendre le carteExploration serializable :
         SerializableCarteExploration carteExploSerializable = new SerializableCarteExploration
         		(this.agent.getCarteExploration());
         
-       // System.out.println(this.agent.getLocalName() + " Avant : \n" + carteExploSerializable);
-
         // Creation de l'identifiant :
         Identifiant id = new Identifiant(this.agent.getLocalName(), this.agent.getIdAgent());
         Carte msgCarte = new Carte(id, carteExploSerializable , this.agent.getCarteTresors(),
@@ -60,7 +54,6 @@ public class SendCarteSonsBehaviour extends OneShotBehaviour {
 			e.printStackTrace();
 		}
 
-	    
         // Envoie de la carte au destinataire qui est le père :
 		this.agent.sendMessage(msg);	
 		
@@ -71,7 +64,6 @@ public class SendCarteSonsBehaviour extends OneShotBehaviour {
 	
 	@Override
 	public int onEnd(){
-		//System.out.println("**** " + this.agent.getLocalName() + " <---- sort de SendCarteSonsBehaviour\n");
 		return this.numberTransition;
 	}
 }

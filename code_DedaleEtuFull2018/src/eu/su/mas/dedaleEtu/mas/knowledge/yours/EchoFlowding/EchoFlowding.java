@@ -60,8 +60,6 @@ public class EchoFlowding implements Serializable {
 			this.insertProtocol(protocole, this.dad);
 			this.racine = false;
 		} else {
-			// ATENTION 
-			System.out.println("--------------------------------------------------NON");
 			if (this.protocolEcho.getID() > this.protocolEcho.getID()) {
 				this.dad = dad;
 				this.insertProtocol(protocole, this.dad);
@@ -140,7 +138,6 @@ public class EchoFlowding implements Serializable {
 	 */
 	private  ProtocoleEcho newProtocolEcho () {
 		ProtocoleEcho newProto =  new ProtocoleEcho(this.agent.getIdAgent(), this.compteurEcho);
-		//System.out.println("-------> " + newProto);
 		this.compteurEcho++;
 		return newProto;
 	}

@@ -254,7 +254,7 @@ public class CarteExploration implements Serializable {
 			while (iter.hasNext()){
 				chemin.add(iter.next().getId());
 			}
-			chemin.remove(0);//Supprime la position courante // Problème
+			chemin.remove(0);
 			shortestPath.add(chemin);
 		}
 		dijkstra.clear();

@@ -34,7 +34,6 @@ public class CheckEchoBoiteLettre extends OneShotBehaviour {
 	
 	@Override
 	public void action() {
-		//System.out.println("**** " + this.agent.getLocalName() + "<---- entre dans CheckEchoBoiteLettre");
 		this.agent.setStrategie(Strategie.EchoFlowdingMap);
 
 		// Check les messages de type Echo :
@@ -49,7 +48,6 @@ public class CheckEchoBoiteLettre extends OneShotBehaviour {
 			try {
 				echo = (ProtocoleEcho) msgRecuEcho.getContentObject();
 			} catch (UnreadableException e1) {
-				//System.out.println("Error : CheckEchoBoitLettre ---> getContentObject()");
 				e1.printStackTrace();
 			}
 					
@@ -70,7 +68,6 @@ public class CheckEchoBoiteLettre extends OneShotBehaviour {
 				this.numTransition = AgentExplorateur.T_ATTENDRE_CONFIRMATION_FILS_AFTER_CHECK_ECHO; 
 			} else {
 				// Aucun message Echo reçu :
-				//System.out.println(this.agent.getLocalName() + " est la racine de la communication");
 				// Maj du Dad et la création d'un nouveau protocole + racine :
 				this.agent.getEchoFlowding().initNewProtocolEcho();
 				// Aigulage de la transition :
@@ -79,11 +76,6 @@ public class CheckEchoBoiteLettre extends OneShotBehaviour {
 		} else {
 			// Si la liste des pères potentielles est non vide :
 			// Aigulage de la transition :
-			/*if (this.agent.getCheckEcho() == true && this.agent.getCptEchoFlowdingMap() < this.agent.getIntervalleEchoMap() /2) {
-				this.numTransition = AgentExplorateur.T_CHECK_ECHO_AFTER_PLANIFICATION; 
-			} else {
-	 			this.numTransition = AgentExplorateur.T_SEND_CONFIRMATION_DAD; 
-			}*/
  			this.numTransition = AgentExplorateur.T_SEND_CONFIRMATION_DAD; 
  			this.agent.setCheckEcho(false);
 		}
@@ -91,7 +83,6 @@ public class CheckEchoBoiteLettre extends OneShotBehaviour {
 
 	@Override
 	public int onEnd(){
-		//System.out.println("**** " + this.agent.getLocalName() + "----> sort de CheckEchoBoiteLettre\n");
 		return this.numTransition;
 	}
 }

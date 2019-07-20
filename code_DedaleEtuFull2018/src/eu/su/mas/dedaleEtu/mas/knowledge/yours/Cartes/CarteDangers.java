@@ -189,11 +189,3 @@ public class CarteDangers implements Serializable {
 		public Boolean getWell () {return this.well;}
 	}
 }
-
-/*
-public void addDangersEnvironnement (List<Couple<String,List<Couple<Observation,Integer>>>> lObsEnvironemment) {
-	for (Couple<String,List<Couple<Observation,Integer>>> lObs : lObsEnvironemment) {
-		String position = lObs.getLeft();
-		this.addDangers(position, lObs.getRight());
-	}
-}*/

@@ -27,7 +27,6 @@ public class RecherchePositionSiloBehaviour extends OneShotBehaviour {
 	
 	@Override
 	public void action() {
-		//System.out.println("**** " + this.agent.getLocalName() + " est dans RecherchePositionSiloBehaviour");
 		this.agent.setStrategie(Strategie.RecherchePositionSilo);
 
 		this.agent.attendre();
@@ -37,16 +36,15 @@ public class RecherchePositionSiloBehaviour extends OneShotBehaviour {
 		if (this.agent.getNodeOpenSiloExploTresor().isEmpty() == true && this.agent.getNodeCloseSiloExploTresor().isEmpty() == true) {			
 			// Recherche dans le graphe les noeuds de plus haut degré :
 			// Récupérer Nb à visiter pour trouver un Tanker :
-			if (this.agent.getNbNodeVisitedSilo() <= this.agent.getCarteExploration().getGraph().getNodeCount()) {// degreeNode.size()) {
+			if (this.agent.getNbNodeVisitedSilo() <= this.agent.getCarteExploration().getGraph().getNodeCount()) {
 				for (int i=0; i < this.agent.getNbNodeVisitedSilo(); i++) {
 					// Ajoute dans les noeuds à visiter pour le collecteur pour trouver le tanker :
-					this.agent.getNodeOpenSiloExploTresor().add(this.agent.getDegreeNode().positionTanker(i));//degreeNode.get(i).getId());
+					this.agent.getNodeOpenSiloExploTresor().add(this.agent.getDegreeNode().positionTanker(i));
 				}
 			} else {
 				// on prend pour la nombre de noeud à visiter pour trouver un Silo : degreeNode.size()
-				for (int i=0; i < this.agent.getCarteExploration().getGraph().getNodeCount()/*degreeNode.size()*/; i++) {
+				for (int i=0; i < this.agent.getCarteExploration().getGraph().getNodeCount(); i++) {
 					// Ajoute dans les noeuds à visiter pour le collecteur pour trouver le tanker :
-					//this.agent.getNodeOpenSilo().add(degreeNode.get(i).getId());
 					this.agent.getNodeOpenSiloExploTresor().add(this.agent.getDegreeNode().positionTanker(i));
 				}
 			}
@@ -137,7 +135,6 @@ public class RecherchePositionSiloBehaviour extends OneShotBehaviour {
 		
 	@Override
 	public int onEnd(){
-		//System.out.println("**** " + this.agent.getLocalName() + " sort de RecherchePositionSiloBehaviour");
 		return this.numTransition;
 	}
 }

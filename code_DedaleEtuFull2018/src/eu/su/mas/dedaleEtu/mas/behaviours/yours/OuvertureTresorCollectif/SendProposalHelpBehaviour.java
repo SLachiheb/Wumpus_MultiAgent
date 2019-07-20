@@ -25,9 +25,7 @@ public class SendProposalHelpBehaviour extends OneShotBehaviour {
 	}
 
 	@Override
-	public void action() {
-		//System.out.println("**** " + this.agent.getLocalName() + " est dans SendProposalHelpBehaviour");
-		
+	public void action() {		
 		// Envoyer une proposition d'aide au géneur :
 		// 1) Creation d'un message :
 		ACLMessage msg = new ACLMessage(ACLMessage.PROPOSE);
@@ -65,7 +63,6 @@ public class SendProposalHelpBehaviour extends OneShotBehaviour {
 	
 	@Override
 	public int onEnd(){
-		//System.out.println("**** " + this.agent.getLocalName() + " sort de SendProposalHelpBehaviour");
 		return AgentAbstrait.T_CHECK_CONFIRMATION_HELP;
 	}
 }

@@ -22,7 +22,6 @@ public class CheckConfirmationPositionSiloBehaviour extends OneShotBehaviour {
 
 	@Override
 	public void action() {
-		//System.out.println("**** " + this.agent.getLocalName() + " est dans ReceiveConfirmationPositionSiloBehaviour");
 		this.agent.setStrategie(Strategie.CheckConfirmationPositionSilo);
 
 		// 1) Verification si il y a des messages de type Signaux dans la boite aux lettres :
@@ -44,7 +43,6 @@ public class CheckConfirmationPositionSiloBehaviour extends OneShotBehaviour {
 
 	@Override
 	public int onEnd(){
-		//System.out.println("**** " + this.agent.getLocalName() + " sort de ReceiveConfirmationPositionSiloBehaviour");
 		return AgentTanker.T_PLANIFICATION_AFTER_CHECK_CONFIRMATION_SILO;
 	}
 }

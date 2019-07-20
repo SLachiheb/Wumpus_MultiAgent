@@ -30,7 +30,6 @@ public class CheckPositionSiloBehaviour extends OneShotBehaviour {
 	
 	@Override
 	public void action() {
-		//System.out.println("**** " + this.agent.getLocalName() + " est dans CheckPositionSiloBehaviour");
 		this.agent.setStrategie(Strategie.CheckPositionSilo);
 
 		// Reboot :
@@ -43,7 +42,6 @@ public class CheckPositionSiloBehaviour extends OneShotBehaviour {
 
 		ACLMessage msgRecuPositionSilo = this.agent.receive(msgTemplate); //.blockingReceive(msgTemplate, 500);
 		while(msgRecuPositionSilo != null) {
-			//System.out.println("\n*******************> " + this.agent.getLocalName() + " -> J'ai recu la position d'un Tanker\n");
 			// Ajoute dans la liste à contacter :
 			this.listSilo.add(msgRecuPositionSilo.getSender());
 			// Récupérer le contenu du message : 
@@ -75,17 +73,14 @@ public class CheckPositionSiloBehaviour extends OneShotBehaviour {
 		// Est-ce que j'ai connais assez de position Silo :
 		if (this.agent.getPositionTanker().size() < this.agent.getNbNodeVisitedSilo()) {
 			this.numTransition = AgentAbstrait.T_RECHERCHE_POS_SILO;
-			//System.out.println("**** " + this.agent.getLocalName() + " Je ne connais pas assez de tanker");
 		} else {
-			this.agent.setCheminPlanification(new ArrayList<String>()); /***/
+			this.agent.setCheminPlanification(new ArrayList<String>());
 			this.numTransition = AgentAbstrait.T_CHECK_SIGNAUX_AFTER_CHECK_POS_SILO;
-			//System.out.println("**** " + this.agent.getLocalName() + " Je connais assez de tanker");
 		}
 	}
 
 	@Override
 	public int onEnd(){
-		//System.out.println("**** " + this.agent.getLocalName() + " sort de CheckPositionSiloBehaviour");
 		return this.numTransition;
 	}
 }

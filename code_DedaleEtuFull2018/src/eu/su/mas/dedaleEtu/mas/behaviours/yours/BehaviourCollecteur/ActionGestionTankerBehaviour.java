@@ -20,9 +20,7 @@ public class ActionGestionTankerBehaviour extends OneShotBehaviour {
 	}
 	
 	@Override
-	public void action() {
-		//System.out.println("**** " + this.agent.getLocalName() + " est dans ActionGestionTankerBehaviour");
-		
+	public void action() {		
 		// MaJ de la carte :
 		this.agent.updateCarte();
 		this.agent.attendre();
@@ -43,8 +41,6 @@ public class ActionGestionTankerBehaviour extends OneShotBehaviour {
 				this.agent.setActionSatisfaction(false);
 				this.agent.setSearchTresorCollectif(false);
 				this.agent.setAttenteTanker(false);
-
-				//this.agent.setActionPDM(null);
 				// Mettre la transition pour envoyer la Map :
 				this.numTransition = AgentCollecteur.T_SEND_MAP_ENV;
 			} else {
@@ -65,12 +61,12 @@ public class ActionGestionTankerBehaviour extends OneShotBehaviour {
 	 */
 	private void seDeplacer () {
 		// Si je ne suis pas en position en Silo, je me déplace :
-		this.agent.setIsMove(this.agent.moveTo(this.agent.getNodesBut().get(0))); // Problem
+		this.agent.setIsMove(this.agent.moveTo(this.agent.getNodesBut().get(0)));
 		
 		if (this.agent.getIsMove()) {
 			System.out.println("**** " + this.agent.getLocalName() + " Je bouge en " +this.agent.getCurrentPosition() + "\n");
 			// Entretient du chemin dans les données de l'agent :
-			this.agent.cheminButRemove(0); // Supprime l'élément current si on a pu bougé
+			this.agent.cheminButRemove(0); // Supprime l'élément current si on a pu bouger
 		} else {
 			System.out.println("**** " + this.agent.getLocalName() + "Move impossible vers " + this.agent.getNodesBut().get(0) 
 					+ ", je reste en " + this.agent.getCurrentPosition() + "\n");
@@ -80,7 +76,6 @@ public class ActionGestionTankerBehaviour extends OneShotBehaviour {
 	
 	@Override
 	public int onEnd(){
-		//System.out.println("**** " + this.agent.getLocalName() + " sort de ActionGestionTankerBehaviour \n ");
 		return this.numTransition;
 	}
 }

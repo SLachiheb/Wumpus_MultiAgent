@@ -65,8 +65,6 @@ public class SerializableCarteExploration implements Serializable {
 		this.serializablEdgeG 	= new ArrayList<PairEdge>();
 		this.noeudsOuvert		= new ArrayList<String>();
 		this.noeudsFerme		= new HashSet<String>();
-		//this.init_nodeBut(carteExploration);
-		//this.init_cheminBut (carteExploration);
 		this.init_MyPosition(carteExploration);
 		this.serializationGraphe(carteExploration);
 	}
@@ -78,12 +76,6 @@ public class SerializableCarteExploration implements Serializable {
 	private void init_MyPosition (CarteExploration carteExploration) {
 		this.myPosition = carteExploration.getMyPosition();
 	}
-	/*private void init_nodeBut (CarteExploration carteExploration) {
-		this.nodeBut = carteExploration.getNodeBut();
-	}
-	private void init_cheminBut (CarteExploration carteExploration) {
-		this.destinationCurrent = carteExploration.getDestinationCurrentBut();
-	}*/
 	
 	/**
 	 * Initialisation du graphe serializableG à partir du Graph g :
@@ -91,8 +83,6 @@ public class SerializableCarteExploration implements Serializable {
 	 */
 	private boolean serializationGraphe(CarteExploration carteExploration) {
 		// PHASE I : Serialization des noeuds :
-		// 0) Nettoie la hashMap serializableG
-		//this.serializablNodeG.clear();
 		// 1) Verifie que le graphe pointe sur un graphe existant
 		if (carteExploration.getGraph() == null) {
 			return false;
@@ -171,15 +161,9 @@ public class SerializableCarteExploration implements Serializable {
 			Node node = carteToFusion.getGraph().getNode(entry.getKey());
 			// Si le noeud n'existe pas :
 			if (node == null) {
-				// Creation du noeud
-				//carteToFusion.addNode(entry.getKey());
-				// Nouveau élément :
 				carteToFusion.setChangeMap(true);
-				
 				Node newNode = carteToFusion.getGraph().addNode(entry.getKey());
-				
-				//System.out.println("Insertion du noeud : " + newNode.getId());
-				
+								
 				// Insertion des attributs :
 				for (PairAttribut pA: entry.getValue()) {
 					newNode.addAttribute(pA.getNameAttribut(), pA.getValueAttribut());
@@ -204,8 +188,6 @@ public class SerializableCarteExploration implements Serializable {
 			// Elimine dans carteToFusion de ses noeudsOuverts le node close :
 			if (carteToFusion.getNodesOpen().contains(node)) {
 				carteToFusion.getNodesOpen().remove(node);
-				//System.out.println("Supprime dans les nodOpens : " + node);
-
 			}
 			// Ajoute le node close à la list des Closes de carteToFusion
 			if (!carteToFusion.getNodesClose().contains(node)) {
@@ -214,7 +196,6 @@ public class SerializableCarteExploration implements Serializable {
 				if (nodee.hasAttribute("ui.class")) {
 					nodee.removeAttribute("ui.class");
 				}
-				//System.out.println("Ajoute dans les nodeCloses : " + node);
 			}
 		}
 		
@@ -222,7 +203,6 @@ public class SerializableCarteExploration implements Serializable {
 			if (!carteToFusion.getNodesClose().contains(node)) {
 				if (!carteToFusion.getNodesOpen().contains(node)) {
 					carteToFusion.addNodeOpen(node);
-					//System.out.println("Ajoute dans les nodOpens : " + node);
 				}
 			}
 		}	
@@ -248,16 +228,6 @@ public class SerializableCarteExploration implements Serializable {
 	public String getMyPosition() {
 		return this.myPosition;
 	}
-	
-	/*public String getNodeBut() {
-		return this.nodeBut;
-	}
-	
-	public List<String> getCheminDestination() {
-		return this.destinationCurrent;
-	}*/
-	
-
 	
 	/**
 	 * Classe Interne 

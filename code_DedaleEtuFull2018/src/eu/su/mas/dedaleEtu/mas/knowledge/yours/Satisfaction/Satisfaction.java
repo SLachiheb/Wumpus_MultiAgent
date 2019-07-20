@@ -126,7 +126,7 @@ public class Satisfaction implements Serializable{
 	private final static Integer		MIN				= 5;
 	private final static Integer		MAX				= 10;
 	private final static Double			SEUIL			= PMAX/2;
-	private Double 						VALUE_START		= new Random().nextDouble() * (MAX - MIN) + MIN; //  Math.random() * ((MAX - MIN)) + MAX;
+	private Double 						VALUE_START		= new Random().nextDouble() * (MAX - MIN) + MIN;
 	
 	// Etat du comportement de l'agent :
 	private EtatAgent				etat;
@@ -205,11 +205,6 @@ public class Satisfaction implements Serializable{
 	public void newCheminBut (List<String> newChemin) {
 		// Reboot :
 		this.findEchappement = false;
-		/*******************/
-		/*if (this.agent.getAbandon() == true) {
-			this.agent.setAbandon(false);
-		}*/
-		
 		// Creation d'une copie du chemin :
 		ArrayList<String> copyChemin = new ArrayList<String>(newChemin);
 		Double satP = 0.0;
@@ -224,27 +219,16 @@ public class Satisfaction implements Serializable{
 			// Modifie la satisfaction Personnel :
 			this.task_current.setSatP(satP);
 		}
-		//System.out.println("(" + this.agent.getLocalName() + ") NOUVELLE Tache ");
 	}
 	
 	/**
 	 * Methode principale de la classe Satisfaction :
 	 */
 	public void run () {
-		/**
-		 * Le faire attendre 500 ms à chaque mouvement
-		 */
-		/*try {
-			this.agent.doWait(500);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}*/
-		//System.out.println("\n(" + this.agent.getLocalName() + ") => Avant MaJ SatP" + this.task_current );
 		// Evaluation de la progression de la tâche current:
 		this.evaluationProgressionTask();
 		// Mise à jour de sa satisfaction current: 
 		this.updateLevelSatisfactionP();
-		//System.out.println("(" + this.agent.getLocalName() + ") => Après MaJ SatP"  + this.task_current+"\n");
 	}
 	
 	/**
@@ -258,7 +242,6 @@ public class Satisfaction implements Serializable{
 		if (this.task_current.getIndex() == -2) {
 			// Si l'agent est arrivé sur son noeud but et qu'il n'y a pas de MàJ :
 			this.task_current.setEtat(LevelProgression.IMMOBILE);
-			//System.out.println("(" + this.agent.getLocalName() + ") plus de noeud possible sur le cheminBut");
 		} else {
 			// Si l'agent est en situation de NON blocage :
 			if (this.agent.getIsMove()) {
@@ -266,13 +249,10 @@ public class Satisfaction implements Serializable{
 				Integer analyseP = this.task_current.getChemin().indexOf(position);
 				// l'indice du chemin ne fait pas partie du cheminInitial de l'agent :
 				if (analyseP == -1 && this.searchEchappatoire == true) {
-					//System.out.println("(" + this.agent.getLocalName() + ") chemin echappatoire trouvé");
 					this.task_current.setEtat(LevelProgression.IMMOBILE);					
 				} else if (analyseP < this.task_current.getIndex()) {
 					this.task_current.setEtat(LevelProgression.ELOIGNEMENT);
-					//System.out.println("(" + this.agent.getLocalName() + ") s'éloigne de sa tache");
 				} else {
-					//System.out.println("(" + this.agent.getLocalName() + ") progresse dans sa tache");
 					this.task_current.setEtat(LevelProgression.PROGRESSION);
 				}
 			} else {
@@ -294,9 +274,7 @@ public class Satisfaction implements Serializable{
 			if (agentTanker.getPositionSilo() != null &&
 					this.agent.getCurrentPosition().equals(agentTanker.getPositionSilo())) {
 				// MaJ de la satisfaction personnelle :
-				//System.out.println("Je suis tanker et je suis à ma position");
 				this.task_current.setSatP(0.);
-				//System.out.println("Je suis tanker voisi ma New SatP : " + this.task_current.getStaP());
 			} else {
 				// MaJ de la satisfaction personnelle :
 				this.task_current.updateSatP(this.task_current.getEtat().getValue());
@@ -306,7 +284,6 @@ public class Satisfaction implements Serializable{
 		if (this.agent.getClass() == AgentExplorateur.class) {
 			AgentExplorateur agentExplorateur = (AgentExplorateur)this.agent;
 			if (agentExplorateur.getAttenteTresor() == true) {
-				//System.out.println("(" + this.agent.getLocalName() + ") : Je suis en attente d'ouverture de trésor, je me met en SatP = 0.0 \n");
 				this.task_current.setSatP(0.);
 			} else {
 				this.task_current.updateSatP(this.task_current.getEtat().getValue());
@@ -316,11 +293,9 @@ public class Satisfaction implements Serializable{
 		if (this.agent.getClass() == AgentCollecteur.class) {
 			AgentCollecteur agentCollecteur = (AgentCollecteur)this.agent;
 			if (agentCollecteur.getAttenteTanker() == true) {
-				//System.out.println("(" + this.agent.getLocalName() + ") : Je suis en attente de Tanker donc je me met en SatP = 0.0 \n");
 				this.task_current.setSatP(0.);
 			} 
 			else if (agentCollecteur.getAttenteTresor() == true) {
-				//System.out.println("(" + this.agent.getLocalName() + ") : Je suis en attente d'ouverture de trésor, je me met en SatP = 0.0 \n");
 				this.task_current.setSatP(0.);
 			}
 			else {
@@ -348,7 +323,7 @@ public class Satisfaction implements Serializable{
 				this.task_current.setIndex(-2); // Rester Immobile.
 			} else {
 				// Le déplacement prévue corresponds à la position prochaine de la position courant de l'agent :
-				this.task_current.setIndex(this.task_current.getChemin().indexOf(position) + 1); // next node.
+				this.task_current.setIndex(this.task_current.getChemin().indexOf(position) + 1);
 			}
 		}
 		
@@ -368,7 +343,6 @@ public class Satisfaction implements Serializable{
 			List<String> newChemin = this.findChemin();
 			// MaJ du cheminBut :
 			this.agent.setCheminBut(newChemin); //
-			//System.out.println("**************** Nouveau noeud but : " + newChemin + "\n");
 			// Devenir Egoiste :
 			this.setEtatSociable(EtatAgent.egoiste);
 			this.list_tabou.clear(); 
@@ -396,8 +370,6 @@ public class Satisfaction implements Serializable{
 
 		// Si je suis toujours en état d'exploration :
 		if (this.agent.getExploration() == true) {
-			//System.out.println("****************Find chemin pour en cas d'abandon de tâche");
-
 			// Recherche les chemins but possible dans les noeuds ouvert :
 			List<List<String>> list_chemin_NO = this.agent.getCarteExploration().getShortestPathNodes(this.agent.getCurrentPosition(),
 					this.agent.getCarteExploration().getNodesOpen(), 5);
@@ -536,12 +508,7 @@ public class Satisfaction implements Serializable{
 		// Calcul pour determiner si l'agent sera altruiste:
 		Double Iext 	= newSignal.getIntensiteSignal();
 		//Double alpha	= this.agent.getTauxSociabilite();
-		//if (alpha*Iext < (1-alpha)*this.task_current.getStaP()) {
 		if (Iext < this.task_current.getStaP() || this.checkSeuilAltruiste(newSignal)) {
-			//System.out.println(this.agent.getLocalName() + " je passe en mode altruiste **********\n");
-			//if (this.agent.getAbandon() == false) {
-				/*******************************************************************/
-
 			this.etat = EtatAgent.altruiste;
 			// MàJ du signal Iext de l'agent, celui-ci est pris en compte.
 			this.signalI = newSignal;
@@ -578,10 +545,7 @@ public class Satisfaction implements Serializable{
 				this.task_current.setSatP(this.signalI.getIntensiteSignal());
 				// Ajoute la position du voisin :
 				this.list_tabou.add(newSignal.getPositionCurrent());
-			} else {
-				System.out.println("ERROR ===============> Ce n'est pas le premier élément de la liste SATISFACTION");
-			}
-			//} 
+			} 
 		} else if (Iext >= this.task_current.getStaP() && this.etat == EtatAgent.altruiste) {
 			// Garder le signal ancien.
 		} else {

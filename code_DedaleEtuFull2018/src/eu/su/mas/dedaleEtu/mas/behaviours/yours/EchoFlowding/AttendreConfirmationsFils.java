@@ -18,7 +18,6 @@ import jade.lang.acl.UnreadableException;
  * Si il reçoit un message refus       : Si il n'a pas de père le rajoute comme père parmis les plus prioritaires.
  * Si il ne reçoit rien    : attends la fin du temps et passe à une autre transition. 
  * @author sarah
- *
  */
 
 public class AttendreConfirmationsFils extends OneShotBehaviour {//SimpleBehaviour {
@@ -42,14 +41,11 @@ public class AttendreConfirmationsFils extends OneShotBehaviour {//SimpleBehavio
 	}
 	
 	@Override
-	public void action() {
-		//System.out.println("**** " + this.agent.getLocalName() + " <---- entre dans AttendreConfirmationsFils\n");
-		
+	public void action() {		
 		MessageTemplate msgYes = MessageTemplate.and(
 				MessageTemplate.MatchPerformative(ACLMessage.ACCEPT_PROPOSAL),
 				MessageTemplate.MatchProtocol("ECHO"));
 	
-		//ACLMessage msgRecu = this.agent.blockingReceive(msgYes, 4000);
 		ACLMessage msgRecu = this.agent.blockingReceive(msgYes, 1000);
 
 		if (msgRecu != null) {
@@ -67,9 +63,7 @@ public class AttendreConfirmationsFils extends OneShotBehaviour {//SimpleBehavio
 					
 					// Si l'agent qui m'accepte comme père à le meme protocole alors de l'accepte comme fils : A VOIR !!!!
 					if (this.agent.getEchoFlowding().getProtocolEcho().getNumEcho().equals(msgContent.getNumEcho()) &&
-							this.agent.getEchoFlowding().getProtocolEcho().getID().equals(msgContent.getID())) {
-						//System.out.println("\n*************** " + this.agent.getLocalName() + "CORRESPONDANCE FILS----->" + msgRecu.getSender() + "\n" + msgContent);
-						
+							this.agent.getEchoFlowding().getProtocolEcho().getID().equals(msgContent.getID())) {						
 						ACLMessage msg = new ACLMessage(ACLMessage.CONFIRM);
 						msg.setProtocol("DAD");
 						// 2) Modifier l'expéditeur du message :
@@ -84,17 +78,8 @@ public class AttendreConfirmationsFils extends OneShotBehaviour {//SimpleBehavio
 						}
 						// 5) Envoie message :
 						this.agent.sendMessage(msg);
-						// Affichage :
-						//System.out.println("**** " + this.agent.getLocalName() + " reçoit la confirmation Dad de " + msgRecu.getSender().getLocalName());
-						//System.out.println(this.agent.getLocalName() + " ajoute en fils " + msgRecu.getSender().getLocalName());
 						this.agent.getEchoFlowding().addSon(msgRecu.getSender()); 
-					} else {
-						//System.out.println("\n*************** " + this.agent.getLocalName() + "AUCUNE CORRESPONDANCE FILS------------------------\n" + 
-						//			this.agent.getEchoFlowding().getProtocolEcho().getNumEcho() + ", " + this.agent.getEchoFlowding().getProtocolEcho().getID() + "\n" +
-						//		msgContent.getNumEcho() + ", " + msgContent.getID() + 
-						//		(this.agent.getEchoFlowding().getProtocolEcho().getNumEcho() == msgContent.getNumEcho()) + ", " + 
-						//				(this.agent.getEchoFlowding().getProtocolEcho().getID() == msgContent.getID()));
-					}
+					} 
 				}
 				msgRecu = this.agent.receive(msgYes);
 			}
@@ -104,7 +89,6 @@ public class AttendreConfirmationsFils extends OneShotBehaviour {//SimpleBehavio
 		
 		// Si tu n'as pas de père à cette état, on te donne une seconde cherche de trouver un père :
 		if (this.agent.getEchoFlowding().isRacine() && this.agent.getEchoFlowding().isSecondeChance() == false) {
-			//System.out.println("**** " + this.agent.getLocalName() + " J'ai une seconde chance t'y croit toi =D");
 			this.agent.getEchoFlowding().setSecondeChance(true);
 			this.numTransition = AgentExplorateur.T_CHECK_ECHO_SECONDE_CHANCE;
 		} else {
@@ -119,7 +103,6 @@ public class AttendreConfirmationsFils extends OneShotBehaviour {//SimpleBehavio
 		if (this.agent.getEchoFlowding().isDad() && this.agent.getEchoFlowding().isRacine()) {
 			this.agent.getEchoFlowding().setRacine(false);
 		}
-		//System.out.println("**** " + this.agent.getLocalName() + " ----> sort de AttendreConfirmationsFils\n");
 		return this.numTransition;
 	}
 }

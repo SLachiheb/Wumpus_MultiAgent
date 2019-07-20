@@ -31,7 +31,6 @@ public class SendConfirmerEchoDadBehaviour extends OneShotBehaviour {
 	
 	@Override
 	public void action() {
-		//System.out.println("**** " + this.agent.getLocalName() + "<---- est dans SendAccepterEchoBehaviour");
 		// 0) Recupère le protocole le plus prioritaire dans la liste des père potentiels : 
 		// Trie des protocoles sur la priorité croissante des agents en fonction de leur ID:
 		this.agent.getEchoFlowding().sortDadPotentiel();
@@ -47,9 +46,6 @@ public class SendConfirmerEchoDadBehaviour extends OneShotBehaviour {
 		msg.addReceiver(dadProtocoleC.getDad());
 		//3Bis) Supprime les autres pères de la liste des pères potentielles :
 		this.agent.getEchoFlowding().getAddDadPotentiel().clear();
-	 	// Affichage :
-    	//System.out.println(this.agent.getLocalName() + "----> envoie l'acceptation de la proposition d'echo à "
-    	//	+ dadProtocoleC.getDad().getLocalName());
     	// 4) Mettre à jour le père potentiel et le protocole potentiel :
     	this.agent.getEchoFlowding().addDad(dadProtocoleC.getDad(), dadProtocoleC.getProtocole());
     	// 5) Mettre le protocole dans les messages :
@@ -65,7 +61,6 @@ public class SendConfirmerEchoDadBehaviour extends OneShotBehaviour {
 
 	@Override
 	public int onEnd(){
-		//System.out.println("**** " + this.agent.getLocalName() + "----> sort de SendAccepterEchoBehaviour\n");
 		return AgentExplorateur.T_ATTENDRE_CONFIRMATION_DAD;
 	}
 }

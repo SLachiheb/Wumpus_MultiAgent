@@ -26,11 +26,7 @@ public class AttendreConfirmationDad extends OneShotBehaviour {
 
 	@Override
 	public void action() {
-		//System.out.println("**** " + this.agent.getLocalName() + " <---- entre dans AttendreConfirmationDad\n");
-		//System.out.println("**** " + this.agent.getLocalName() + " data EchoFlowing :\n" + this.agent.getEchoFlowding());
-		//System.out.println("Ma position " + this.agent.getCurrentPosition());
 		// Check Son dans la boite au lettre : 
-		
 		MessageTemplate messageTemplate = MessageTemplate.and(
 				MessageTemplate.MatchPerformative(ACLMessage.CONFIRM), MessageTemplate.MatchProtocol("DAD"));
 				
@@ -53,27 +49,15 @@ public class AttendreConfirmationDad extends OneShotBehaviour {
 					// Verifie que la demande de confirmation correspond bien au père potentiel que j'ai retenu et qu'il ne soit pas ancien:
 					if (msg.getSender().getLocalName().equals(this.agent.getEchoFlowding().getDad().getLocalName()) &&
 							msgContent.getNumEcho() >= this.agent.getEchoFlowding().getIterationEcho(msg.getSender())) {
-						//System.out.println("---------------------------------------------------------------------------");
-						// Message de confirmation de père :
-						//System.out.println(this.agent.getLocalName() + " confirme pour père " + this.agent.getEchoFlowding().getDad().getLocalName()
-						//		+ " avec le protocole " + this.agent.getEchoFlowding().getProtocolEcho());
 						// Mettre l'agent sender dans la liste à ne pas envoyer d'echo :
 						this.agent.getEchoFlowding().addNoEcho(msg.getSender());
 						// Message de confirmation reçu :
 						this.confirmation = true;
-					} else {
-						//System.out.print("J'ai reçu la confirmation de mon père mais je l'ai refusé chit !!");
-					}
-				} else {
-					//System.out.println("\n*************** " + this.agent.getLocalName() + " AUCUNE CORRESPONDANCE DAD -----------------\n");
-				}
+					} 
 			}
 			msg = this.agent.receive(messageTemplate);
 		}
 		if (this.confirmation == false) {
-			// Affichage :
-			//System.out.println(this.agent.getLocalName() + " supprime comme père potentiel " + this.agent.getEchoFlowding().getDad().getLocalName()
-			//		+ " avec le protocole " + this.agent.getEchoFlowding().getProtocolEcho());
 			// Supprimer le père potentiel + Creation d'un protocole :
 			this.agent.getEchoFlowding().supprimerDadPotentiel();
 		}
@@ -81,8 +65,6 @@ public class AttendreConfirmationDad extends OneShotBehaviour {
 
 	@Override
 	public int onEnd(){
-		// Affichage :
-		//System.out.println("**** " + this.agent.getLocalName() + " ----> sort de AttendreConfirmationDad\n");
 		// Ré-initialiser la confirmation à false :
 		this.confirmation = false;
 		if (this.agent.getEchoFlowding().isSecondeChance() == true) {

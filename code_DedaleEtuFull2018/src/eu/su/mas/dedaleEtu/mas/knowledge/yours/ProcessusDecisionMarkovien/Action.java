@@ -30,14 +30,14 @@ public class Action implements Serializable{
 	}
 	
 	public void addActionTresor (ActionTresor etatTresor) {
-		if (this.actions.containsKey(etatTresor.getIdAction()) == false) { //  voir pour le contain
+		if (this.actions.containsKey(etatTresor.getIdAction()) == false) {
 				this.actions.put(etatTresor.getIdAction(), etatTresor);
 				this.actionsTresors.add(etatTresor);
 		}
 	}
 	
 	public void addActionTanker (ActionTanker etatTanker) {
-		if (this.actions.containsKey(etatTanker.getIdAction()) == false) { //  voir pour le contain
+		if (this.actions.containsKey(etatTanker.getIdAction()) == false) {
 				this.actions.put(etatTanker.getIdAction(), etatTanker);
 				this.actionsTankers.add(etatTanker);
 		}

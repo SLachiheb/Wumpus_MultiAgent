@@ -126,8 +126,6 @@ public class AgentCollecteur extends AgentAbstrait{
 	 * @return
 	 */
 	public List<String> searchChemin_isAbandonTask () {
-		//System.out.println("*****" + this.getLocalName() + " : ABANDON");
-
 		ArrayList<String> cheminFind = new ArrayList<String>();
 		
 		// Mettre à jour la satisfaction :
@@ -146,7 +144,7 @@ public class AgentCollecteur extends AgentAbstrait{
 		if (nodeCloses.isEmpty() == false) {
 			// Recherche tout les chemins allant de ma position à un noeud close :
 			List<List<String>> list_chemin_close = this.getCarteExploration().getShortestPathNodes(this.getCurrentPosition(),
-					new ArrayList<String>(nodeCloses), (nodeCloses.size()/* / 2*/)/*5*/);		
+					new ArrayList<String>(nodeCloses), (nodeCloses.size());		
 			
 			if (this.getNodesBut().isEmpty() == false) {
 				// Supprime les chemins passant par le noeud bloqué :
@@ -169,7 +167,6 @@ public class AgentCollecteur extends AgentAbstrait{
 				cheminFind = new ArrayList<String>(list_chemin_close.get(alea));
 			}	
 		} 
-		//System.out.println("*****" + this.getLocalName() + " : ABANDON pour aller en " + cheminFind);
 		return cheminFind;
 	}
 	public void					updateCapacitySac(Integer value) {this.capacitySac = value;}

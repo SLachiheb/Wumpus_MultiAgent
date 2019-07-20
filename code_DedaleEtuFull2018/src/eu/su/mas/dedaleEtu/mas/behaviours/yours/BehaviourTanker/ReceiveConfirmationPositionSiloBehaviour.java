@@ -20,8 +20,6 @@ public class ReceiveConfirmationPositionSiloBehaviour extends OneShotBehaviour {
 	}
 	@Override
 	public void action() {
-		//System.out.println("**** " + this.agent.getLocalName() + " est dans ReceiveConfirmationPositionSiloBehaviour");
-
 		this.agent.setStrategie(Strategie.ReceiveConfirmationPositionSilo);
 		
 		// 1) Reception des messages des Silos :
@@ -30,10 +28,7 @@ public class ReceiveConfirmationPositionSiloBehaviour extends OneShotBehaviour {
 				MessageTemplate.MatchProtocol("CONFIRMATION_POSITION_SILO"));
 
 		ACLMessage msgRecuPositionSilo = this.agent.receive(msgTemplate);
-		while(msgRecuPositionSilo != null) {
-			
-			//System.out.println("\n*******************> " + this.agent.getLocalName() + "J'ai recu la position d'un Agent\n");
-			
+		while(msgRecuPositionSilo != null) {			
 			// Verifie si on a pas déjà l'agent silo dans la BD :
 			if (this.agent.getKnowledgePositionSilo().contains(msgRecuPositionSilo.getSender().getLocalName()) == false) {
 				// Ajouter la position du silo, si on a pas l'agent silo dans la HashMap :
@@ -47,7 +42,6 @@ public class ReceiveConfirmationPositionSiloBehaviour extends OneShotBehaviour {
 
 	@Override
 	public int onEnd(){
-		//System.out.println("**** " + this.agent.getLocalName() + " sort de ReceiveConfirmationPositionSiloBehaviour");
 		return AgentTanker.T_PLANIFICATION_AFTER_RECEIVE;
 	}
 }
