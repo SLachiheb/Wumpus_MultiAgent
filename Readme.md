@@ -19,7 +19,7 @@ Dans ce projet, nous cherchons à mettre en place une variante de ce jeu dans la
 ### Rapport du projet
 | Fichier |
 | :-------------  |
-| Rapport | [click here](https://gitlab.com/ProjetLachiheb/wumpus_multiagent/tree/master/code_DedaleEtuFull2018/src/eu/su/mas/dedaleEtu/mas/agents/yours)|
+| [Rapport](https://gitlab.com/ProjetLachiheb/wumpus_multiagent/blob/master/rapport.pdf)|
 
 ## Installation préalable 
 
