@@ -20,6 +20,7 @@ Dans ce projet, nous cherchons à mettre en place une variante de ce jeu dans la
 | Fichier |
 | :-------------  |
 | [Rapport](https://gitlab.com/ProjetLachiheb/wumpus_multiagent/blob/master/rapport.pdf)|
+| [Annexes](https://gitlab.com/ProjetLachiheb/wumpus_multiagent/blob/master/Annexe.pdf)|
 
 ## Installation préalable 
 
