@@ -16,9 +16,16 @@ multi-agent JADE.
 
 Dans ce projet, nous cherchons à mettre en place une variante de ce jeu dans laquelle un ensemble d’agents ici, "Explorateur", "Collecteur", "Silo versus Tanker" et "Golem" doivent explorer un environnement inconnu et collecter des trésors disséminés dans cet environnement. Le but des agents est de maximiser la quantité de trésors collectés et rapportés à un agent  silo . Seuls les trésors possédés par cet agent spécifique seront pris en compte afin de calculer le score de performance de la collecte.
 
+### Rapport du projet
+| Fichier |
+| :-------------  |
+| Rapport | [click here](https://gitlab.com/ProjetLachiheb/wumpus_multiagent/tree/master/code_DedaleEtuFull2018/src/eu/su/mas/dedaleEtu/mas/agents/yours)|
+
 ## Installation préalable 
 
-Pour pouvoir exécuter ce projet, il est nécessaire d'importer les librairies Cplex studio et d'exécuter le code sur Eclipse pour une meilleur expérience.
+Il est nécessaire d'importer au préalable, les librairies Cplex studio pour le fonctionnement du projet.
+
+Pour exécuter le programme, il est nécessaire d'utiliser "Eclipse" et de selectionner le fichier Principal.java présent dans le dossier "princ", puis faire un clic droit sur celui-ci en selectionnant "run as../Java application".
 
 ## Code source
 
