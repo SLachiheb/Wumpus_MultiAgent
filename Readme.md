@@ -17,7 +17,7 @@ multi-agent JADE.
 Dans ce projet, nous cherchons à mettre en place une variante de ce jeu dans laquelle un ensemble d’agents ici, "Explorateur", "Collecteur", "Silo versus Tanker" et "Golem" doivent explorer un environnement inconnu et collecter des trésors disséminés dans cet environnement. Le but des agents est de maximiser la quantité de trésors collectés et rapportés à un agent  silo . Seuls les trésors possédés par cet agent spécifique seront pris en compte afin de calculer le score de performance de la collecte.
 
 ### Rapport :
-| Fichier |
+| Fichiers |
 | :-------------  |
 | [Rapport](https://gitlab.com/ProjetLachiheb/wumpus_multiagent/blob/master/Rapport/rapport.pdf)|
 | [Annexes](https://gitlab.com/ProjetLachiheb/wumpus_multiagent/blob/master/Rapport/Annexe.pdf)|
