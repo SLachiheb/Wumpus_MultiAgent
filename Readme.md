@@ -29,7 +29,7 @@ Pour plus de lisibilité du rapport, il est préférable de télécharger les do
 
 Il est nécessaire d'importer au préalable les librairies Cplex studio pour le fonctionnement du projet.
 
-Pour exécuter le programme, il est nécessaire d'utiliser "Eclipse" et de selectionner le fichier Principal.java présent dans le dossier "princ", puis faire un clic droit sur celui-ci en selectionnant "run as../Java application".
+Pour exécuter le programme, lancer "Eclipse" et selectionner le fichier Principal.java présent dans le dossier "princ", puis faire un clic droit sur celui-ci en selectionnant "run as../Java application", tout en n'oubliant pas de mettre le chemin "-Djava.library.path="path"/cplex/bin/"system" dans le VM arguments pour le lien Cplex.
 
 ### Visualisation de l'interface :
 
