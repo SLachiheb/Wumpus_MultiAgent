@@ -28,6 +28,18 @@ Il est nécessaire d'importer au préalable les librairies Cplex studio pour le 
 
 Pour exécuter le programme, il est nécessaire d'utiliser "Eclipse" et de selectionner le fichier Principal.java présent dans le dossier "princ", puis faire un clic droit sur celui-ci en selectionnant "run as../Java application".
 
+### Visualisation de l'interface :
+
+Dans cette illustration, il y 7 agents en place sur la plateforme Jade avec 2 Explorateurs, 3 Collecteurs, 1 Silo et un Golem. 
+
+* Comm-nbMsgs : Nombre de communication émis entre agents cognitifs.
+* T-Env : Quantité de ressource encore disponible sur la carte.
+* T-Silo : Quantité de ressource receptionée par l'agent Silo.
+* T-Golem : Quantité de ressource volé par l'agent Golem.
+* T-Team : Score de la Team.
+
+![MacDown Screenshot](/Users/cassandre/Desktop/Projet_FOSYMA/Rapport/Illustration.png)
+
 ## Code source
 
 | Type de dossier | Répertoire correspondant |
@@ -35,6 +47,3 @@ Pour exécuter le programme, il est nécessaire d'utiliser "Eclipse" et de selec
 | Agents | [click here](https://gitlab.com/ProjetLachiheb/wumpus_multiagent/tree/master/code_DedaleEtuFull2018/src/eu/su/mas/dedaleEtu/mas/agents/yours)|
 |Comportements | [click here](https://gitlab.com/ProjetLachiheb/wumpus_multiagent/tree/master/code_DedaleEtuFull2018/src/eu/su/mas/dedaleEtu/mas/behaviours/yours)|
 | Connaissances | [click here](https://gitlab.com/ProjetLachiheb/wumpus_multiagent/tree/master/code_DedaleEtuFull2018/src/eu/su/mas/dedaleEtu/mas/knowledge/yours)|
-
- 
-
