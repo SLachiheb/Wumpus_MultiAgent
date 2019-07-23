@@ -38,7 +38,7 @@ Dans cette illustration, il y 7 agents en place sur la plateforme Jade avec 2 Ex
 * T-Golem : Quantité de ressource volé par l'agent Golem.
 * T-Team : Score de la Team.
 
-![MacDown Screenshot](/Users/cassandre/Desktop/Projet_FOSYMA/Rapport/Illustration.png)
+![MacDown Screenshot](Rapport/Illustration.png)
 
 ## Code source
 
