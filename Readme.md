@@ -40,7 +40,7 @@ Dans cette illustration, il y 7 agents en place sur la plateforme Jade avec 2 Ex
 
 ![MacDown Screenshot](Rapport/Illustration.png)
 
-## Code source
+## Code sources
 
 | Type de dossier | Répertoire correspondant |
 | :-------------  | :------------------------|
